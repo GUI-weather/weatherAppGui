@@ -14,9 +14,9 @@ function WeeklyForecast({ city }) {
             <div className="forecast-list">
                 {dailyForecastData.list.map((forecast, index) => (
                     <div key={index} className="forecast-item">
-                        <h3>{new Date(forecast.dt * 1000).toLocaleDateString()}</h3> 
-                        <p>{forecast.weather[0].description}</p> 
-                        <p>{kelvinToCelsius(forecast.temp.day)}°</p>
+                        <h3>{new Date(forecast.dt * 1000).toLocaleDateString()}</h3> {/* Convert Unix timestamp to date */}
+                        <p>Description: {forecast.weather[0].description}</p> {/* Display weather description */}
+                        <p>Temperature: {kelvinToCelsius(forecast.temp.day)}°C</p> {/* Convert and display temperature */}
                     </div>
                 ))}
             </div>

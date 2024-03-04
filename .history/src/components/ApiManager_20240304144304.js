@@ -3,35 +3,35 @@ import { useState, useEffect } from 'react';
 const apiKey = '24388925ee460f3e9351095efde842a0'; // My API key
 
 export async function fetchWeatherData(city) {
-  try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+    try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }
 
 export async function fetchWeatherForecast(city) {
-  try {
-    const response = await fetch(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${city}&appid=${apiKey}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+    try {
+        const response = await fetch(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${city}&appid=${apiKey}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }
 
 export async function fetchWeatherForecastDaily(city) {
   try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=6&appid=${apiKey}`);
-    const data = await response.json();
-    return data;
+      const response = await fetch(`api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=7&appid=${apiKey}`);
+      const data = await response.json();
+      return data;
   } catch (error) {
-    console.error(error);
-    return null;
+      console.error(error);
+      return null;
   }
 }
 
@@ -57,5 +57,5 @@ export function useWeatherData(city) {
     fetchData();
   }, [city]);
 
-  return { weatherData, forecastData, dailyForecastData };
+  return { weatherData, forecastData,dailyForecastData };
 }

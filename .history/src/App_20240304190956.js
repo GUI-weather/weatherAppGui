@@ -15,7 +15,7 @@ function App() {
         <MainInfo city={city} />
         <RightSideMainInfo city={city}/>
         <HourlyWeatherBox city={city}/>
-        <WeeklyForecast city={city}/>
+        {/* <WeeklyForecast city={city}/> */}
       </div>
     </div>
   );

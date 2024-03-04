@@ -105,7 +105,7 @@ Table of contents
 }
 
 .right-side-main-info {
-  grid-column: 5; /* Position in the grid */
+  grid-column: 4; /* Position in the grid */
   grid-row: 1; 
 }
 
@@ -119,14 +119,14 @@ Table of contents
 /*******************************/
 
 .weekly-forecast-box {
-  grid-column: 4 / span 2; /* Position in the grid */
+  grid-column: 3 / span 2; /* Position in the grid */
   grid-row: 3; /* Position in the grid */
 }
 
 .forecast-list {
   display: grid;
-  grid-template-columns: repeat(3, 0.5fr); /* 3 columns */
-  grid-gap: 5px; /* Gap between grid items */
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-gap: 10px; /* Gap between grid items */
 }
 
 

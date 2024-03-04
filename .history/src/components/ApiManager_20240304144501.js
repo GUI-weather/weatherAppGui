@@ -26,7 +26,7 @@ export async function fetchWeatherForecast(city) {
 
 export async function fetchWeatherForecastDaily(city) {
   try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=6&appid=${apiKey}`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=7&appid=${apiKey}`);
     const data = await response.json();
     return data;
   } catch (error) {
