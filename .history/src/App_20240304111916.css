@@ -44,11 +44,6 @@ Table of contents
   margin-right: 20px; /* Add spacing between items */
 }
 
-.hourly-weather-box {
-  grid-column: 2 / span 3; /* Position in the grid */
-  grid-row: 3; 
-}
-
 
 /******************************/
 /* hourlyWeather styles ends  */
@@ -102,6 +97,11 @@ Table of contents
 
 .right-side-main-info h2{
   font-size: 32px;
+}
+
+.main-info {
+  grid-column: 2; /* Position in the grid */
+  grid-row: 1; 
 }
 
 .right-side-main-info {

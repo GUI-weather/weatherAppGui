@@ -1,13 +1,13 @@
 import React from 'react';
 import { useWeatherData } from './ApiManager';
-import { kelvinToCelsius } from './reusable';
+
+// Function to convert temperature from Kelvin to Celsius
+function kelvinToCelsius(tempKelvin) {
+    return Math.round(tempKelvin - 273.15);
+}
 
 function MainInfo({ city }) {
-    const { weatherData, error } = useWeatherData(city); // Fetch weather data for the specified city
-
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
+    const weatherData = useWeatherData(city); // Fetch weather data for the specified city
 
     if (!weatherData) {
         return <div>Loading...</div>;
@@ -15,9 +15,9 @@ function MainInfo({ city }) {
 
     // Extract relevant data from the weather data
     const cityName = weatherData.name;
-    const currentTemperature = kelvinToCelsius(weatherData.main?.temp);
-    const highTemperature = kelvinToCelsius(weatherData.main?.temp_max);
-    const lowTemperature = kelvinToCelsius(weatherData.main?.temp_min);
+    const currentTemperature = kelvinToCelsius(weatherData.main.temp);
+    const highTemperature = kelvinToCelsius(weatherData.main.temp_max);
+    const lowTemperature = kelvinToCelsius(weatherData.main.temp_min);
 
     return (
         <div className="main-info">

@@ -17,7 +17,7 @@ function HourlyWeatherBox({ city }) {
       <div className="hourly-weather-list">
         {next5HoursForecast.map((forecast, index) => (
           <div key={index} className="hourly-weather-item">
-            <h3>{new Date(forecast.dt_txt).getHours()}:00</h3>
+            <h3>{forecast.dt_txt}</h3>
             <h4>{forecast.weather[0].description}</h4>
             <h3>{kelvinToCelsius(forecast.main.temp)}°</h3>
           </div>

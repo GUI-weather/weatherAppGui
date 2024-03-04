@@ -1,13 +1,13 @@
 import React from 'react';
 import { useWeatherData } from './ApiManager';
-import { kelvinToCelsius } from './reusable';
 
-function MainInfo({ city }) {
-    const { weatherData, error } = useWeatherData(city); // Fetch weather data for the specified city
+//function to change temp to C as api returns in kelvin
+function kelvinToCelsius(tempKelvin) {
+    return Math.round(tempKelvin - 273.15);
+}
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
+function MainInfo() {
+    const weatherData = useWeatherData('Wroclaw'); // Fetch weather data for London
 
     if (!weatherData) {
         return <div>Loading...</div>;
@@ -15,9 +15,9 @@ function MainInfo({ city }) {
 
     // Extract relevant data from the weather data
     const cityName = weatherData.name;
-    const currentTemperature = kelvinToCelsius(weatherData.main?.temp);
-    const highTemperature = kelvinToCelsius(weatherData.main?.temp_max);
-    const lowTemperature = kelvinToCelsius(weatherData.main?.temp_min);
+    const currentTemperature = kelvinToCelsius(weatherData.main.temp);
+    const highTemperature = kelvinToCelsius(weatherData.main.temp_max);
+    const lowTemperature = kelvinToCelsius(weatherData.main.temp_min);
 
     return (
         <div className="main-info">

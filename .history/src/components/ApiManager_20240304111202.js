@@ -15,7 +15,7 @@ export async function fetchWeatherData(city) {
 
 export async function fetchWeatherForecast(city) {
     try {
-        const response = await fetch(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${city}&appid=${apiKey}`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`);
         const data = await response.json();
         return data;
     } catch (error) {
@@ -23,6 +23,7 @@ export async function fetchWeatherForecast(city) {
         return null;
     }
 }
+
 
 export function useWeatherData(city) {
   const [weatherData, setWeatherData] = useState(null);

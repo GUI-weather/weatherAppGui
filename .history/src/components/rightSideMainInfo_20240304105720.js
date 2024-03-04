@@ -2,19 +2,15 @@ import React from 'react';
 import { useWeatherData } from './ApiManager';
 
 function RightSideMainInfo({ city }) {
-  const { weatherData, error } = useWeatherData(city);
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  const weatherData = useWeatherData(city);
 
   if (!weatherData) {
     return <div>Loading...</div>;
   }
 
   // Extract relevant data from the weather data
-  const humidity = weatherData.main?.humidity;
-  const pressure = weatherData.main?.pressure;
+  const humidity = weatherData.main.humidity;
+  const pressure = weatherData.main.pressure;
   const currentTime = new Date();
   const hours = currentTime.getHours();
   const greeting = getGreeting(hours);

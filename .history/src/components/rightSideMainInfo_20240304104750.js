@@ -1,20 +1,31 @@
-import React from 'react';
-import { useWeatherData } from './ApiManager';
+import React, { useState, useEffect } from 'react';
+import { fetchWeatherData } from './ApiManager';
 
-function RightSideMainInfo({ city }) {
-  const { weatherData, error } = useWeatherData(city);
+function RightSideMainInfo() {
+  const [weatherData, setWeatherData] = useState(null);
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  useEffect(() => {
+    // Fetch weather data when the component mounts
+    async function fetchData() {
+      try {
+        const city = 'London'; // Default city
+        const data = await fetchWeatherData(city);
+        setWeatherData(data);
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   if (!weatherData) {
     return <div>Loading...</div>;
   }
 
   // Extract relevant data from the weather data
-  const humidity = weatherData.main?.humidity;
-  const pressure = weatherData.main?.pressure;
+  const humidity = weatherData.main.humidity;
+  const pressure = weatherData.main.pressure;
   const currentTime = new Date();
   const hours = currentTime.getHours();
   const greeting = getGreeting(hours);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useWeatherData } from './ApiManager';
-import { kelvinToCelsius } from './reusable';
+import { kelvinToCelsius } from './mainInfo';
 
 function HourlyWeatherBox({ city }) {
   const { forecastData } = useWeatherData(city);
@@ -10,16 +10,16 @@ function HourlyWeatherBox({ city }) {
   }
 
   // Extract the next 5 hours of forecast data
-  const next5HoursForecast = forecastData.list.slice(1, 6);
+  const next5HoursForecast = forecastData.list.slice(0, 5);
 
   return (
     <div className="hourly-weather-box">
       <div className="hourly-weather-list">
         {next5HoursForecast.map((forecast, index) => (
           <div key={index} className="hourly-weather-item">
-            <h3>{new Date(forecast.dt_txt).getHours()}:00</h3>
+            <h3>{forecast.dt_txt}</h3>
             <h4>{forecast.weather[0].description}</h4>
-            <h3>{kelvinToCelsius(forecast.main.temp)}°</h3>
+            <h3>{kelvinToCelsius(forecast.main.temp)}</h3>
           </div>
         ))}
       </div>

@@ -45,8 +45,8 @@ Table of contents
 }
 
 .hourly-weather-box {
-  grid-column: 2 / span 3; /* Position in the grid */
-  grid-row: 3; 
+  grid-column: 3 / span 2; /* Span across 2 columns starting from the third column */
+  grid-row: 3; /* Position it in the third row */
 }
 
 
@@ -102,6 +102,11 @@ Table of contents
 
 .right-side-main-info h2{
   font-size: 32px;
+}
+
+.main-info {
+  grid-column: 2; /* Position in the grid */
+  grid-row: 1; 
 }
 
 .right-side-main-info {

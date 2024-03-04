@@ -1,6 +1,10 @@
 import React from 'react';
 import { useWeatherData } from './ApiManager';
-import { kelvinToCelsius } from './reusable';
+
+// Function to convert temperature from Kelvin to Celsius
+function kelvinToCelsius(tempKelvin) {
+    return Math.round(tempKelvin - 273.15);
+}
 
 function MainInfo({ city }) {
     const { weatherData, error } = useWeatherData(city); // Fetch weather data for the specified city

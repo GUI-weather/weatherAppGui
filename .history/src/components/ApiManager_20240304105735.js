@@ -15,7 +15,7 @@ export async function fetchWeatherData(city) {
 
 export async function fetchWeatherForecast(city) {
     try {
-        const response = await fetch(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${city}&appid=${apiKey}`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`);
         const data = await response.json();
         return data;
     } catch (error) {
@@ -26,15 +26,12 @@ export async function fetchWeatherForecast(city) {
 
 export function useWeatherData(city) {
   const [weatherData, setWeatherData] = useState(null);
-  const [forecastData, setForecastData] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const currentWeather = await fetchWeatherData(city);
-        const weatherForecast = await fetchWeatherForecast(city);
-        setWeatherData(currentWeather);
-        setForecastData(weatherForecast);
+        const data = await fetchWeatherData(city);
+        setWeatherData(data);
       } catch (error) {
         console.error('Error fetching weather data:', error);
       }
@@ -43,5 +40,24 @@ export function useWeatherData(city) {
     fetchData();
   }, [city]);
 
-  return { weatherData, forecastData };
+  return weatherData;
+}
+
+export function useWeatherForecast(city) {
+  const [weatherForecast, setWeatherForecast] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await fetchWeatherForecast(city);
+        setWeatherForecast(data);
+      } catch (error) {
+        console.error('Error fetching weather forecast:', error);
+      }
+    }
+
+    fetchData();
+  }, [city]);
+
+  return weatherForecast;
 }

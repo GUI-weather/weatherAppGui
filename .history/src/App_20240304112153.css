@@ -45,8 +45,8 @@ Table of contents
 }
 
 .hourly-weather-box {
-  grid-column: 2 / span 3; /* Position in the grid */
-  grid-row: 3; 
+  grid-column: 2 / span 2; /* Span across 2 columns starting from the third column */
+  grid-row: 3; /* Position it in the third row */
 }
 
 
