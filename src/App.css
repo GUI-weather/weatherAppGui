@@ -16,19 +16,39 @@ Table of contents
 /* General Styles start       */
 /******************************/
 
-
 .App {
+  /* background colour of first column*/
   background-color: #252525;
+
+  /* font colouring */
   color: white;
+  
+  /* screen formatting */
   padding: 20px;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Cover the entire viewport height */
+  width: 100vw;
 }
 
 .layout {
+  /* grid layout for the entire app */
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1f; 
-  grid-template-rows: 1fr 1fr 1fr 1f 1fr 1fr; 
-  gap: 20px; 
+
+  /* two columns, first being larger */
+  grid-template-columns: 7fr 3fr;
+  grid-template-areas: 
+  '. .'  /*replace each dot with a name, and the section you want to add there, enter in that css "grid-area: name*/
+  'main-info right-side-main-info' /*2nd row*/
+  'hourly-weather-box weekly-forecast-box'; /*3rd row*/
 }
+
+/* formatting for the second column */
+.layout > :nth-child(2n) {
+  background-color:#acacac;
+}
+
+
 /******************************/
 /* General Styles end         */
 /******************************/
@@ -40,13 +60,31 @@ Table of contents
 /******************************/
 
 .hourly-weather-item {
-  display: inline-block;
-  margin-right: 20px; /* Add spacing between items */
+  width: calc(15%); /* Adjust the width of the items */
+  box-sizing: border-box; /* Include margins within the width */
+  position: relative;
+  left: 4%;
 }
 
 .hourly-weather-box {
-  grid-column: 2 / span 3; /* Position in the grid */
-  grid-row: 3; 
+  grid-area: hourly-weather-box;
+ }
+
+.hourly-weather-list{
+
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+
+  /*box design*/
+  width: 90%;
+  height: 60%;
+  flex-shrink: 0;
+  border-radius: 30px;
+  background: #726C6C;  
+  position: relative;
+  top: 20%;
+  left: 5%;
 }
 
 
@@ -70,12 +108,24 @@ Table of contents
 /* mainInfo Styles start      */
 /******************************/
 
-.main-info h1 {
-  font-size: 128px;
+/* all main info centered */
+.main-info h1, .main-info h2, .main-info h3{
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
 }
 
-.h2 {
-  font-size: 64px;
+.main-info h1 {
+  font-size: 130px;
+
+  /*adjusts positioning of the main forecast downwards*/
+  position: relative;
+  top: 70px;
+}
+
+
+.main-info h2 {
+  font-size: 32px;
 }
 
 .main-info h3 {
@@ -83,9 +133,18 @@ Table of contents
 }
 
 .main-info {
-  grid-column: 2; /* Position in the grid */
-  grid-row: 1; 
+  grid-area: main-info;
 }
+
+.main-info-list{
+  width: 90%;
+  height: 80%;
+  position: relative;
+  bottom:10%;
+  left: 5%;
+}
+
+
 
 /******************************/
 /* mainInfo Styles end        */
@@ -96,18 +155,36 @@ Table of contents
 /* rightSideMainInfo Styles start */
 /**********************************/
 
+.right-side-main-info-list-firstHalf {
+  margin-bottom: 10%;
+}
+
 .right-side-main-info h1 {
   font-size: 48px;
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+  margin: 0px;
+  
 }
 
 .right-side-main-info h2{
-  font-size: 32px;
+  font-size: 25px;
+
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+  margin:0px;
 }
 
 .right-side-main-info {
-  grid-column: 5; /* Position in the grid */
-  grid-row: 1; 
+  grid-area: right-side-main-info;
+
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
 }
+
 
 /**********************************/
 /* rightSideMainInfo Styles end   */
@@ -119,14 +196,32 @@ Table of contents
 /*******************************/
 
 .weekly-forecast-box {
-  grid-column: 4 / span 2; /* Position in the grid */
-  grid-row: 3; /* Position in the grid */
+  grid-area: weekly-forecast-box;
 }
 
+
 .forecast-list {
-  display: grid;
-  grid-template-columns: repeat(3, 0.5fr); /* 3 columns */
-  grid-gap: 5px; /* Gap between grid items */
+  display: grid; /*made a grid for this section, so icon can be 3 per row*/
+  grid-template-columns: 1fr 1fr 1fr; /* 3 columns */
+  grid-gap: 10px; /* Gap between grid items */
+  place-items: center;
+  position: relative;
+  bottom: 10px;
+  
+}
+
+.forecast-item {
+  width: 83px;
+  height: 165px;
+  flex-shrink: 0;
+  background-image: url(images/weeklyForecastItemBackground.png);
+  
+}
+
+.forecast-item h3, .forecast-item p {
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
 }
 
 

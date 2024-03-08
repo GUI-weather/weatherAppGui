@@ -19,11 +19,14 @@ function MainInfo({ city }) {
     const highTemperature = kelvinToCelsius(weatherData.main?.temp_max);
     const lowTemperature = kelvinToCelsius(weatherData.main?.temp_min);
 
+    // CHANGE BY ALESHA: added div main-info-list
     return (
         <div className="main-info">
-            <h1>{currentTemperature}°</h1>
-            <h2>{cityName}</h2>
-            <h3>H: {highTemperature}° L: {lowTemperature}°</h3>
+            <div className="main-info-list">
+                <h1>{currentTemperature}°</h1> 
+                <h2>{cityName}</h2>
+                <h3>H: {highTemperature}° L: {lowTemperature}°</h3> 
+            </div>  
         </div>
     );
 }
