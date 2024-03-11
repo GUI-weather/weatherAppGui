@@ -12,13 +12,12 @@ Table of contents
 */
 
 
-/******************************/
-/* General Styles start       */
-/******************************/
+/************************/
+/*    General Styles    */
+/************************/
 
 .App {
-  /* background colour of first column*/
-  background-color: #252525;
+  background: linear-gradient(180deg, #141313 44.53%, #2B2929 77.09%, #363333 98.01%, #333030 100%, #7A7474 100%);
 
   /* font colouring */
   color: white;
@@ -27,8 +26,7 @@ Table of contents
   padding: 20px;
   margin: 0;
   padding: 0;
-  min-height: 100vh; /* Cover the entire viewport height */
-  width: 100vw;
+  
 }
 
 .layout {
@@ -37,30 +35,40 @@ Table of contents
 
   /* two columns, first being larger */
   grid-template-columns: 7fr 3fr;
+
   grid-template-areas: 
-  '. .'  /*replace each dot with a name, and the section you want to add there, enter in that css "grid-area: name*/
-  'main-info right-side-main-info' /*2nd row*/
-  'hourly-weather-box weekly-forecast-box'; /*3rd row*/
+  /* FIRST ROW */
+  /* '. .'  */ 
+  /* replace each dot with a name, and the section you want to add there, enter in that css "grid-area: name */
+  
+  /* SECOND ROW */
+  'main-info right-side-main-info'
+  /* THIRD ROW */
+  'hourly-weather-box weekly-forecast-box';
+
+  /* Cover the entire viewport height AND width */
+  min-height: 100vh;
+  width: 100vw;
 }
 
-/* formatting for the second column */
+
+/* Second column format */
 .layout > :nth-child(2n) {
-  background-color:#acacac;
+  background-color: #C0C0C0;
 }
 
 
-/******************************/
-/* General Styles end         */
-/******************************/
 
 
 
-/******************************/
-/* hourlyWeather styles start */
-/******************************/
+
+
+/****************************/
+/*   hourlyWeather styles   */
+/****************************/
 
 .hourly-weather-item {
-  width: calc(15%); /* Adjust the width of the items */
+  width: calc(20% - 2%); /* Adjust the width of the items */
   box-sizing: border-box; /* Include margins within the width */
   position: relative;
   left: 4%;
@@ -73,24 +81,24 @@ Table of contents
 .hourly-weather-list{
 
   display: flex;
-  justify-content: center; /* Horizontal centering */
-  align-items: center; /* Vertical centering */
+  justify-content: center;
+  align-items: center;
 
   /*box design*/
   width: 90%;
   height: 60%;
   flex-shrink: 0;
   border-radius: 30px;
-  background: #726C6C;  
+  background: #5C5C5C;
   position: relative;
   top: 20%;
   left: 5%;
 }
 
 
-/******************************/
-/* hourlyWeather styles ends  */
-/******************************/
+
+
+
 
 
 /*****************************************/
@@ -104,139 +112,232 @@ Table of contents
 
 
 
-/******************************/
-/* mainInfo Styles start      */
-/******************************/
 
-/* all main info centered */
+
+
+
+/***********************/
+/*   mainInfo Styles   */
+/***********************/
+
 .main-info h1, .main-info h2, .main-info h3{
   display: flex;
-  justify-content: center; /* Horizontal centering */
-  align-items: center; /* Vertical centering */
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  
 }
 
 .main-info h1 {
-  font-size: 130px;
-
-  /*adjusts positioning of the main forecast downwards*/
-  position: relative;
-  top: 70px;
+  font-size: 190px;
+  line-height: 0;
 }
 
-
 .main-info h2 {
-  font-size: 32px;
+  font-size: 64px;
+  line-height: 0.5;
 }
 
 .main-info h3 {
-  font-size: 32px;
+  font-size: 36px;
+  line-height: 0.25;
 }
 
 .main-info {
   grid-area: main-info;
+  align-self: end;
+  margin-bottom: -50px;
 }
 
 .main-info-list{
   width: 90%;
   height: 80%;
   position: relative;
-  bottom:10%;
   left: 5%;
 }
 
 
 
-/******************************/
-/* mainInfo Styles end        */
-/******************************/
 
 
-/**********************************/
-/* rightSideMainInfo Styles start */
-/**********************************/
 
-.right-side-main-info-list-firstHalf {
-  margin-bottom: 10%;
+
+/********************************/
+/*   rightSideMainInfo Styles   */
+/********************************/
+
+.right-side-main-info-list-secondHalf {
+  position: relative;
+  margin-top: 20%;
 }
+
 
 .right-side-main-info h1 {
   font-size: 48px;
   display: flex;
-  justify-content: center; /* Horizontal centering */
-  align-items: center; /* Vertical centering */
+  justify-content: center;
+  align-items: center;
   margin: 0px;
   
 }
 
 .right-side-main-info h2{
   font-size: 25px;
-
   display: flex;
-  justify-content: center; /* Horizontal centering */
-  align-items: center; /* Vertical centering */
+  justify-content: center;
+  align-items: center;
   margin:0px;
+}
+
+.right-side-main-info-list {
+  position: relative;
+  top: 10%;
 }
 
 .right-side-main-info {
   grid-area: right-side-main-info;
-
   display: flex;
-  justify-content: center; /* Horizontal centering */
-  align-items: center; /* Vertical centering */
+  justify-content: center;
+  align-items: center;
 }
 
 
-/**********************************/
-/* rightSideMainInfo Styles end   */
-/**********************************/
 
 
-/*******************************/
-/* weeklyForecast Styles start */
-/*******************************/
+
+
+
+/*****************************/
+/*   weeklyForecast Styles   */
+/*****************************/
 
 .weekly-forecast-box {
   grid-area: weekly-forecast-box;
 }
-
 
 .forecast-list {
   display: grid; /*made a grid for this section, so icon can be 3 per row*/
   grid-template-columns: 1fr 1fr 1fr; /* 3 columns */
   grid-gap: 10px; /* Gap between grid items */
   place-items: center;
-  position: relative;
-  bottom: 10px;
-  
 }
 
 .forecast-item {
-  width: 83px;
+  height: 169px;
+  width: 60px;
+  padding: 5px 15px 5px 6px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: #5C5C5C;
+
+  /* IGNORE THIS FOR NOW */
+
+  /* width: 83px;
   height: 165px;
   flex-shrink: 0;
-  background-image: url(images/weeklyForecastItemBackground.png);
+  background-image: url(images/weeklyForecastItemBackground.png); */
   
 }
 
 .forecast-item h3, .forecast-item p {
   display: flex;
-  justify-content: center; /* Horizontal centering */
-  align-items: center; /* Vertical centering */
+  justify-content: center;
+  align-items: center; 
 }
 
 
-/*******************************/
-/* weeklyForecast Styles end */
-/*******************************/
+
+
+
+
+
+
+
+
 
 
 /**********************/
-/* Responsivnes start */
+/*   Responsiveness   */
 /**********************/
 
+/* TABLET RESPONSIVENESS */
+
+@media screen and (max-width: 1024px) {
+
+  /************************/
+  /* hourlyWeather styles */
+  /************************/
+
+  .hourly-weather-list{
+      width: 90%;
+      height: 50%;
+      font-size: 13px;
+      top: 30%;
+  }
+
+
+
+
+  /*******************/
+  /* mainInfo Styles */
+  /*******************/
+
+  .main-info h1 {
+      font-size: 90px;
+  }
+  
+  .main-info h2 {
+      font-size: 36px;
+  }
+  
+  .main-info h3 {
+      font-size: 30px;
+  }
+  
+  .main-info-list{
+      width: 90%;
+      height: 80%;
+      margin-bottom: -40px;
+  }
+
+
+
+
+  /****************************/
+  /* rightSideMainInfo Styles */
+  /****************************/
+  
+  .right-side-main-info h1 {
+      font-size: 25px;
+  }
+  
+  .right-side-main-info h2{
+      font-size: 20px;
+  }
+  
+
+
+  
+  /**************************/
+  /* weeklyForecast Styles  */
+  /**************************/
+  
+  .weekly-forecast-box {
+      display: grid;
+      place-items: center;
+  }
+  
+  .forecast-item {
+      font-size: 10px;
+  
+      height: 103px;
+      width: 35px;
+      
+  }
+}
 
 /**********************/
-/* Responsivnes end   */
+/* Responsiveness end */
 /**********************/
 
 
