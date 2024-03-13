@@ -105,6 +105,160 @@ Table of contents
 /* lightModeDarkModeSwitch Styles start  */
 /*****************************************/
 
+/* Styling for SVG icons within a label */
+label svg {
+  z-index: 100; /* Sets the stacking order of SVG icons */
+  opacity: 1; /* Sets the initial opacity of SVG icons */
+  pointer-events: none; /* Prevents SVG icons from receiving pointer events */
+  transition: opacity 0.3s ease-in-out, transform 0.5s ease; /* Adds transition effects to SVG icons */
+}
+
+
+
+/* Styling for the sun SVG icon */
+label svg.sun {
+  display: flex; /* Sets the display type for the sun SVG icon */
+  align-items: center; /* Aligns items along the cross-axis */
+  justify-content: center; /* Aligns items along the main-axis */
+  opacity: 1; /* Sets the opacity of the sun SVG icon */
+  fill: yellow; /* Sets the fill color of the sun SVG icon */
+}
+
+
+/* Styling for the moon SVG icon */
+label svg.moon {
+  display: flex; /* Sets the display type for the moon SVG icon */
+  opacity: 0; /* Sets the initial opacity of the moon SVG icon */
+  fill: #252525; /* Sets the fill color of the moon SVG icon */
+}
+
+
+/* Styling for the sun SVG icon when the input is checked */
+input:checked + label svg.sun {
+  opacity: 0; /* Sets the opacity of the sun SVG icon when input is checked */
+  fill: #bdbdbd; /* Sets the fill color of the sun SVG icon when input is checked */
+}
+
+
+/* Styling for the moon SVG icon when the input is checked */
+input:checked + label svg.moon {
+  opacity: 1; /* Sets the opacity of the moon SVG icon when input is checked */
+}
+
+
+/* Styling for the circular element within the toggle switch when the theme is light */
+.theme-light .sliderRound:before {
+  background-color: #f0f0f0; /* Sets the background color of the circular element to light gray */
+}
+
+
+/* Styling for the toggle switch when the theme is dark */
+.theme-dark .sliderRound {
+  background-color: #333; /* Sets the background color of the toggle switch to dark gray */
+}
+
+
+
+/* Styling for label elements */
+label {
+  width: 25px; /* Sets the width of label elements */
+  height: 25px; /* Sets the height of label elements */
+  display: flex; /* Sets the display type for label elements */
+  justify-content: space-between; /* Aligns items along the main-axis with space between them */
+  align-items: center; /* Aligns items along the cross-axis */
+  background: #ebebeb; /* Sets the background color of label elements */
+  border-radius: 15px; /* Sets the border radius of label elements */
+  box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4); /* Sets the box shadow of label elements */
+  cursor: pointer; /* Sets the cursor type for label elements */
+  transition: background-color 0.3s ease; /* Adds transition effects to the background color of label elements */
+}
+
+
+/* Styling for input elements */
+input {
+  width: 0; /* Sets the width of input elements to 0 */
+  height: 0; /* Sets the height of input elements to 0 */
+  visibility: hidden; /* Hides input elements from the layout */
+}
+
+/* Styling for the light theme */
+.theme-light {
+  background-color: white; /* Sets the background color of the light theme to white */
+  color: black; /* Sets the text color of the light theme to black */
+}
+
+.theme-light .switch-container:before {
+  background-color: white; /* Sets the background color of the toggle switch in the light theme to white */
+}
+
+.theme-light .switch-container input:checked + .switch-container {
+  background-color: white; /* Sets the background color of the checked toggle switch in the light theme to white */
+}
+
+/* Styling for the dark theme */
+.theme-dark {
+  background-color: black; /* Sets the background color of the dark theme to black */
+  color: white; /* Sets the text color of the dark theme to white */
+}
+
+.theme-dark .switch-container:before {
+  background-color: #333; /* Sets the background color of the toggle switch in the dark theme to dark gray */
+}
+
+
+.theme-dark .switch-container input:checked + .switch-container {
+  background-color: #333; /*Sets the background color of the checked toggle switch in the dark theme to dark gray */
+}
+
+
+
+
+/* Styling for the container of the switch */
+.switch-container {
+  display: grid; /* Sets the display type for the switch container to grid */
+  grid-template-columns: 1fr 2fr; /* Defines the columns for the grid layout */
+  justify-items: auto; /* Aligns items along the main-axis */
+  align-items: center; /* Aligns items along the cross-axis */
+  width: 60px; /* Sets the width of the switch container */
+  height: 48px; /* Sets the height of the switch container */
+}
+  
+
+
+/* Styling for the toggle switch */
+.sliderRound {
+  position: absolute; /* Sets the position of the toggle switch */
+  cursor: pointer; /* Sets the cursor type when hovering over the toggle switch */
+  top: 20px; /* Sets the top position of the toggle switch */
+  right: 20px; /* Sets the right position of the toggle switch */
+  width: 72px; /* Sets the width of the toggle switch */
+  height: 38px; /* Sets the height of the toggle switch */
+  background-color: gray; /* Sets the background color of the toggle switch */
+  border-radius: 34px; /* Sets the border radius of the toggle switch */
+  transition: background-color 0.2s ease-in, transform 0.3s ease-out; /* Adds transition effects to the toggle switch */
+}
+
+
+/* Styling for the circular element within the toggle switch */
+.sliderRound:before {
+  content: ""; /* Inserts content before the circular element */
+  position: absolute; /* Sets the position of the circular element */
+  left: 3px; /* Sets the left position of the circular element */
+  height: 34px; /* Sets the height of the circular element */
+  width: 34px; /* Sets the width of the circular element */
+  background-color: white; /* Sets the background color of the circular element */
+  border-radius: 50%; /* Sets the border radius of the circular element */
+  transition: transform 0.3s cubic-bezier(0.25, 0.5, 0.75, 1); /* Adds transition effects to the circular element */
+}
+
+
+
+/*Styling for the circular element within the toggleSwitch when the input is checked */
+input:checked + .sliderRound:before{
+  transform: translateX(90%) scale(1.0); /*Sets the transform properties of the circular element when input is checked */
+}
+
+
 
 /*****************************************/
 /* lightModeDarkModeSwitch Styles end    */
@@ -339,5 +493,3 @@ Table of contents
 /**********************/
 /* Responsiveness end */
 /**********************/
-
-
