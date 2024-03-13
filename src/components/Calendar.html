@@ -1,411 +1,178 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calendar Page</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #ffe4e1; 
-    margin: 0;
-    padding: 0;
-  }
-  .container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 800px;
-    margin: 20px auto;
-  }
-  .calendar {
-    width: 48%;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-  .header {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .month-year {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  .days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-  }
-  .day {
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    cursor: pointer;
-    position: relative;
-  }
-  .day:hover {
-    background-color: #f0f0f0;
-  }
-  .current-day {
-    background-color: #add8e6;
-  }
-  .note-indicator {
-    position: absolute;
-    bottom: 2px;
-    right: 2px;
-    font-size: 12px;
-    color: blue;
-  }
-  .note-indicator.no-click {
-    pointer-events: none;
-  }
-  .note-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    display: none;
-    z-index: 1;
-  }
-  .note-popup textarea {
-    width: calc(100% - 40px);
-    height: 100px;
-    resize: none;
-    margin-bottom: 10px;
-  }
-  .note-popup button {
-    width: calc(50% - 5px);
-    cursor: pointer;
-  }
+import React, { useState, useEffect } from 'react';
 
-  .monthly-review {
-    width: 48%;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    overflow-y: auto;
-  }
-  .monthly-review-header {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  .note-item {
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-    cursor: pointer;
-  }
-  .note-date {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  .note-content {
-    margin-bottom: 5px;
-  }
+function CalendarPage() {
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('calendarNotes')) || {});
+  const [searchDate, setSearchDate] = useState('');
 
-  .search-section {
-    width: 100%;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
-  .search-input {
-    width: calc(100% - 100px);
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  .search-button {
-    width: 100px;
-    padding: 8px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #68a3d5;
-    color: #fff;
-    cursor: pointer;
-  }
-  .search-button:hover {
-    background-color: #add8e6;
-  }
+  useEffect(() => {
+    generateCalendar(currentYear, currentMonth);
+    generateMonthlyNotesOverview();
+  }, [currentYear, currentMonth]);
 
-  @media screen and (max-width: 480px) {
-    .container {
-      flex-direction: column;
-    }
-    .calendar, .monthly-review {
-      width: 100%;
-    }
-    .note-popup {
-      width: calc(100% - 40px);
-      padding: 10px;
-    }
-    .note-popup button {
-      width: 100%;
-      margin-top: 10px;
-    }
-  }
-</style>
-</head>
-<body>
-
-<div class="container">
-  <div class="calendar">
-    <div class="header">
-      <button onclick="previousMonth()">&lt;</button>
-      <div class="month-year" id="monthAndYear"></div>
-      <button onclick="nextMonth()">&gt;</button>
-    </div>
-    <div class="search-section">
-      <input type="date" class="search-input" id="searchDate">
-      <button class="search-button" onclick="searchDate()">Search</button>
-    </div>
-    <div class="days" id="calendarDays"></div>
-    <button onclick="goToCurrentMonth()">Go to Current Month</button>
-  </div>
-
-  <div class="monthly-review" id="monthOverview"></div>
-</div>
-
-<div class="note-popup" id="notePopup">
-  <textarea id="noteContent" placeholder="Enter your note..."></textarea>
-  <button onclick="saveNote()">Save Note</button>
-  <button onclick="deleteNote()">Delete Note</button>
-</div>
-
-<script>
-  let currentYear = new Date().getFullYear();
-  let currentMonth = new Date().getMonth();
-  let currentDate = new Date().getDate();
-  let notes = JSON.parse(localStorage.getItem('calendarNotes')) || {};
-
-  async function generateCalendar(year, month) {
+  const generateCalendar = (year, month) => {
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const startingDayIndex = new Date(year, month, 1).getDay();
     const startingDay = daysOfWeek[startingDayIndex];
 
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    const monthAndYear = document.getElementById('monthAndYear');
-    monthAndYear.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
-
-    const calendarDays = document.getElementById('calendarDays');
-    calendarDays.innerHTML = '';
-
-    daysOfWeek.forEach(day => {
-      const dayElement = document.createElement('div');
-      dayElement.textContent = day;
-      calendarDays.appendChild(dayElement);
-    });
-
+    const calendarDays = [];
     let currentDayIndex = daysOfWeek.indexOf(startingDay);
+
     for (let i = 0; i < currentDayIndex; i++) {
-      const emptyDay = document.createElement('div');
-      calendarDays.appendChild(emptyDay);
+      calendarDays.push(null);
     }
 
     for (let i = 1; i <= daysInMonth; i++) {
-      const dayElement = document.createElement('div');
-      dayElement.textContent = i;
-      dayElement.classList.add('day');
-      dayElement.dataset.date = `${year}-${month + 1}-${i}`;
-      dayElement.addEventListener('click', handleDayClick);
-      calendarDays.appendChild(dayElement);
+      const date = new Date(year, month, i);
+      calendarDays.push({
+        date: date,
+        dayOfWeek: daysOfWeek[date.getDay()],
+        dayOfMonth: i,
+        isCurrentDay: isSameDate(date, new Date())
+      });
+    }
 
-      const currentDateObj = new Date();
-      const currentDayDateObj = new Date(year, month, i);
-      if (currentDayDateObj.toDateString() === currentDateObj.toDateString()) {
-        dayElement.classList.add('current-day');
+    setCalendar(calendarDays);
+  };
+
+  const generateMonthlyNotesOverview = () => {
+    const monthlyReview = [];
+    Object.entries(notes).forEach(([date, note]) => {
+      const [year, month, day] = date.split('-').map(Number);
+      if (year === currentYear && month - 1 === currentMonth) {
+        monthlyReview.push({
+          date: new Date(year, month - 1, day),
+          note: note
+        });
       }
+    });
 
-      if (notes[dayElement.dataset.date]) {
-        const noteIndicator = document.createElement('span');
-        noteIndicator.textContent = '⬤';
-        noteIndicator.classList.add('note-indicator');
-        noteIndicator.classList.add('no-click');
-        dayElement.appendChild(noteIndicator);
+    setMonthlyReview(monthlyReview);
+  };
+
+  const handleDayClick = (date) => {
+    const formattedDate = formatDate(date);
+    if (notes[formattedDate]) {
+    
+    } else {
+      
+    }
+  };
+
+  const handleNoteItemClick = (date) => {
+    const formattedDate = formatDate(date);
+    if (notes[formattedDate]) {
+      
+    }
+  };
+
+  const saveNote = (date, noteContent) => {
+    const formattedDate = formatDate(date);
+    setNotes(prevNotes => ({
+      ...prevNotes,
+      [formattedDate]: noteContent
+    }));
+    localStorage.setItem('calendarNotes', JSON.stringify({
+      ...notes,
+      [formattedDate]: noteContent
+    }));
+    generateMonthlyNotesOverview();
+  };
+
+  const deleteNote = (date) => {
+    const formattedDate = formatDate(date);
+    const { [formattedDate]: omit, ...updatedNotes } = notes;
+    setNotes(updatedNotes);
+    localStorage.setItem('calendarNotes', JSON.stringify(updatedNotes));
+    generateMonthlyNotesOverview();
+  };
+
+  const previousMonth = () => {
+    setCurrentMonth(prevMonth => {
+      let newMonth = prevMonth - 1;
+      let newYear = currentYear;
+      if (newMonth < 0) {
+        newMonth = 11;
+        newYear--;
       }
-    }
-  }
+      setCurrentYear(newYear);
+      return newMonth;
+    });
+  };
 
-  function handleDayClick(event) {
-    const dayElement = event.target;
-    const date = dayElement.dataset.date;
-    const note = notes[date];
-    const notePopup = document.getElementById('notePopup');
-    const noteContent = document.getElementById('noteContent');
+  const nextMonth = () => {
+    setCurrentMonth(prevMonth => {
+      let newMonth = prevMonth + 1;
+      let newYear = currentYear;
+      if (newMonth > 11) {
+        newMonth = 0;
+        newYear++;
+      }
+      setCurrentYear(newYear);
+      return newMonth;
+    });
+  };
 
-    if (note) {
-      noteContent.value = note;
-      notePopup.dataset.date = date;
-      notePopup.style.display = 'block';
-    } else {
-      addNotePopup(dayElement);
-    }
-  }
-
-  function addNotePopup(dayElement) {
-    const notePopup = document.getElementById('notePopup');
-    const noteContent = document.getElementById('noteContent');
-    noteContent.value = '';
-    notePopup.dataset.date = dayElement.dataset.date;
-    notePopup.style.display = 'block';
-  }
-
-  function saveNote() {
-    const notePopup = document.getElementById('notePopup');
-    const date = notePopup.dataset.date;
-    const noteContent = document.getElementById('noteContent').value.trim();
-    if (noteContent) {
-      notes[date] = noteContent;
-    } else {
-      delete notes[date];
-    }
-    localStorage.setItem('calendarNotes', JSON.stringify(notes));
-    notePopup.style.display = 'none';
-    generateCalendar(currentYear, currentMonth);
-    generateMonthlyNotesOverview();
-  }
-
-  function deleteNote() {
-    const notePopup = document.getElementById('notePopup');
-    const date = notePopup.dataset.date;
-    delete notes[date];
-    localStorage.setItem('calendarNotes', JSON.stringify(notes));
-    notePopup.style.display = 'none';
-    generateCalendar(currentYear, currentMonth);
-    generateMonthlyNotesOverview();
-  }
-
-  document.addEventListener('mousedown', function(event) {
-    const notePopup = document.getElementById('notePopup');
-    if (!notePopup.contains(event.target)) {
-      notePopup.style.display = 'none';
-    }
-  });
-
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-      const notePopup = document.getElementById('notePopup');
-      notePopup.style.display = 'none';
-    }
-  });
-
-  function previousMonth() {
-    currentMonth--;
-    if (currentMonth < 0) {
-      currentMonth = 11;
-      currentYear--;
-    }
-    generateCalendar(currentYear, currentMonth);
-    generateMonthlyNotesOverview();
-  }
-
-  function nextMonth() {
-    currentMonth++;
-    if (currentMonth > 11) {
-      currentMonth = 0;
-      currentYear++;
-    }
-    generateCalendar(currentYear, currentMonth);
-    generateMonthlyNotesOverview();
-  }
-
-  function goToCurrentMonth() {
+  const goToCurrentMonth = () => {
     const today = new Date();
-    currentYear = today.getFullYear();
-    currentMonth = today.getMonth();
-    generateCalendar(currentYear, currentMonth);
-    generateMonthlyNotesOverview();
-  }
+    setCurrentYear(today.getFullYear());
+    setCurrentMonth(today.getMonth());
+  };
 
-  function searchDate() {
-    const searchDate = document.getElementById('searchDate').value;
+  const handleSearchDateChange = (event) => {
+    setSearchDate(event.target.value);
+  };
+
+  const handleSearchDateSubmit = (event) => {
+    event.preventDefault();
     if (searchDate) {
       const [year, month, day] = searchDate.split('-');
       if (year && month && day) {
-        currentYear = parseInt(year);
-        currentMonth = parseInt(month) - 1;
-        generateCalendar(currentYear, currentMonth);
-        generateMonthlyNotesOverview();
+        setCurrentYear(parseInt(year));
+        setCurrentMonth(parseInt(month) - 1);
       }
     }
-  }
+  };
 
-  function generateMonthlyNotesOverview() {
-    const monthlyReview = document.getElementById('monthOverview');
-    monthlyReview.innerHTML = '';
-    const monthAndYear = document.createElement('div');
-    monthAndYear.textContent = new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long', year: 'numeric' });
-    monthAndYear.classList.add('monthly-review-header');
-    monthlyReview.appendChild(monthAndYear);
+  return (
+    <div className="container">
+      <div className="calendar">
+        <div className="header">
+          <button onClick={previousMonth}>&lt;</button>
+          <div className="month-year">{new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long', year: 'numeric' })}</div>
+          <button onClick={nextMonth}>&gt;</button>
+        </div>
+        <div className="search-section">
+          <form onSubmit={handleSearchDateSubmit}>
+            <input type="date" className="search-input" value={searchDate} onChange={handleSearchDateChange} />
+            <button type="submit" className="search-button">Search</button>
+          </form>
+        </div>
+        <div className="days">
+          {/* calendar days */}
+        </div>
+        <button onClick={goToCurrentMonth}>Go to Current Month</button>
+      </div>
 
-    Object.entries(notes).forEach(([date, note]) => {
-      const [noteYear, noteMonth, noteDate] = date.split('-').map(Number);
-      if (noteYear === currentYear && noteMonth === currentMonth + 1) {
-        const noteItem = document.createElement('div');
-        noteItem.classList.add('note-item');
-        noteItem.dataset.date = date;
-        noteItem.addEventListener('click', handleNoteItemClick);
+      <div className="monthly-review">
+        {/* monthly notes overview */}
+      </div>
+    </div>
+  );
+}
 
-        const noteDateElem = document.createElement('div');
-        noteDateElem.classList.add('note-date');
-        noteDateElem.textContent = `${noteDate}/${noteMonth}/${noteYear}`;
-        noteItem.appendChild(noteDateElem);
+export default CalendarPage;
 
-        const noteContent = document.createElement('div');
-        noteContent.classList.add('note-content');
-        noteContent.textContent = note;
-        noteItem.appendChild(noteContent);
+const isSameDate = (date1, date2) => {
+  return date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate();
+};
 
-        monthlyReview.appendChild(noteItem);
-      }
-    });
-  }
-
-  function handleNoteItemClick(event) {
-    const noteItem = event.target.closest('.note-item');
-    const date = noteItem.dataset.date;
-    const note = notes[date];
-    const notePopup = document.getElementById('notePopup');
-    const noteContent = document.getElementById('noteContent');
-
-    if (note) {
-      noteContent.value = note;
-      notePopup.dataset.date = date;
-      notePopup.style.display = 'block';
-    } else {
-      addNotePopupForMonthlyReview(noteItem);
-    }
-  }
-
-  function addNotePopupForMonthlyReview(noteItem) {
-    const notePopup = document.getElementById('notePopup');
-    const noteContent = document.getElementById('noteContent');
-    noteContent.value = '';
-    notePopup.dataset.date = noteItem.dataset.date;
-    notePopup.style.display = 'block';
-  }
-
-  generateCalendar(currentYear, currentMonth);
-  generateMonthlyNotesOverview();
-</script>
-
-</body>
-</html>
+const formatDate = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
