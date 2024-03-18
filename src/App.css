@@ -1,495 +1,735 @@
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu+Mono&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Kanit:wght@300&display=swap');
+
+
+
 /*
 Table of contents 
 ###############################
-1) general styles
-2) hourlyWeather
-3) lightModeDarkModeSwitch
-4) mainInfo
-5) rightSideMain
-6) weeklyForecast
-7) Responsivnes 
+1) reset
+2) landscape responsiveness
+    2.1) general styles
+    2.2) lightModeDarkModeSwitch
+    2.3) mainInfo
+    2.4) hourlyWeather
+    2.5) rightSideMainInfo
+    2.6) weeklyForecast
+3) mobile responsiveness
+    2.1) general styles
+    2.2) lightModeDarkModeSwitch
+    2.3) mainInfo
+    2.4) rightSideMainInfo
+    2.5) hourlyWeather
+    2.6) weeklyForecast
 ################################
 */
 
 
 /************************/
-/*    General Styles    */
+/*        reset         */
 /************************/
 
-.App {
-  background: linear-gradient(180deg, #141313 44.53%, #2B2929 77.09%, #363333 98.01%, #333030 100%, #7A7474 100%);
+h1, h2, p, h3, h4{
+    font-size: 100%;
+    font-weight: 500;
+}
 
-  /* font colouring */
-  color: white;
+
+/**********************************/
+/*    landscape responsiveness    */
+/**********************************/
+
+@media screen and (max-width: 2560px) {
+
+    @media screen and (orientation:landscape) {
+
+        /************************/
+        /*    General Styles    */
+        /************************/
+
+        .App {
+            /* background colour */
+            background: linear-gradient(180deg, #141313 1.5%, #141313 13.5%, #141313 21%, #191717 43%, #2B2929 64.5%, #312F2F 89%, #363333 98.01%, #353333 99.99%, #333030 100%, #7A7474 100%), #D9D9D9;             
+            /* font color */
+            color: white; 
+            padding: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .layout {
+            display: grid;
+        
+            grid-template-columns: 7fr 3fr;
+        
+            grid-template-areas: 
+            /* first switch needs to be replaced for calander implementation */
+            'switch switch'  
+            /* SECOND ROW */
+            'main-info right-side-main-info'
+            /* THIRD ROW */
+            'hourly-weather-box weekly-forecast-box';
+        
+            /* Cover the entire viewport height AND width */
+            min-height: 100vh;
+            width: 100vw;
+        }
+        
+        .layout > :nth-child(2n + 1) {
+            background: #0E0D0D;
+        }
+
+
+        /***************************/
+        /* lightModeDarkModeSwitch */
+        /***************************/
+
+        .switch {
+            grid-area: switch;
+
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            
+        }
+
+        /* Styling for SVG icons within a label */
+        label svg {
+            position: relative;
+            right: 5px;
+            opacity: 1; /* Sets the initial opacity of SVG icons */
+            pointer-events: none; /* Prevents SVG icons from receiving pointer events */
+            transition: opacity 0.3s ease-in-out, transform 0.5s ease; /* Adds transition effects to SVG icons */
+        }
+        
+        
+        /* Styling for the sun SVG icon */
+        label svg.sun {
+            display: flex; /* Sets the display type for the sun SVG icon */
+            align-items: center; /* Aligns items along the cross-axis */
+            justify-content: center; /* Aligns items along the main-axis */
+            opacity: 1; /* Sets the opacity of the sun SVG icon */
+        }
+        
+        
+        /* Styling for the moon SVG icon */
+        label svg.moon {
+            display: flex; /* Sets the display type for the moon SVG icon */
+            opacity: 0; /* Sets the initial opacity of the moon SVG icon */
+            fill: #252525; /* Sets the fill color of the moon SVG icon */
+            position: relative;
+            right: 35px;
+        }
+        
+        
+        /* Styling for the sun SVG icon when the input is checked */
+        input:checked + label svg.sun {
+            opacity: 0; /* Sets the opacity of the sun SVG icon when input is checked */
+            fill: #bdbdbd; /* Sets the fill color of the sun SVG icon when input is checked */
+        }
+        
+        
+        /* Styling for the moon SVG icon when the input is checked */
+        input:checked + label svg.moon {
+            opacity: 1; /* Sets the opacity of the moon SVG icon when input is checked */
+        }
+             
+        
+        /* Styling for label elements */
+        label {
+            display: flex; /* Sets the display type for label elements */
+            align-items: center; /* Aligns items along the cross-axis */
+            border-radius: 15px; /* Sets the border radius of label elements */
+            transition: background-color 0.3s ease; /* Adds transition effects to the background color of label elements */
+        }
+
+              
+        /* Styling for input elements */
+        input {
+            width: 0; /* Sets the width of input elements to 0 */
+            height: 0; /* Sets the height of input elements to 0 */
+            visibility: hidden; /* Hides input elements from the layout */
+        }
+        
+        /* Styling for the light theme */
+        .theme-light {
+            background: linear-gradient(180deg, #FFF 0%, #D0D0D0 50.77%, #A3A3A3 99.98%, #7E7E7E 99.99%, #737373 100%); /* Sets the background color of the light theme*/
+            color: black; /* Sets the text color of the light theme */
+        }
+
+        .theme-light .layout > :nth-child(2n + 1) {
+            background: #C0C0C0; /* Sets background colour of 2nd column */
+        }
+
+        .theme-light .hourly-weather-list,
+        .theme-light .right-side-main-info-list-firstHalf,
+        .theme-light .forecast-item  {
+            background: #FFF9F9; /* Sets the background colour for solid shaped elements */
+        }
+        
+        .theme-light .right-side-main-info-list-firstHalf,
+        .theme-light .forecast-item  {
+            filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.25));
+        }  
+        
+        /* Styling for the container of the switch */
+        .switch-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+            right: 30px;
+            padding-top: 10px;
+        }
+        
+
+        /****** TOGGLE SWITCH STYLING ******/
+        
+        /* Styling for the toggle switch when the theme is light */
+        .theme-light .sliderRound {
+            background-color: #0E0D0D /* Sets the background color of the toggle switch when in light mode*/
+        }
+        
+        /* Styling for the toggle switch when theme is dark*/
+        .sliderRound {
+            cursor: pointer; /* Sets the cursor type when hovering over the toggle switch */
+
+            width: 124px; /* Sets the width of the toggle switch */
+            height: 58px; /* Sets the height of the toggle switch */
+
+            background-color: #C0C0C0; /* Sets the background color of the toggle switch when in dark mode */
+
+            border-radius: 34px; /* Sets the border radius of the toggle switch */
+            transition: background-color 0.2s ease-in, transform 0.3s ease-out; /* Adds transition effects to the toggle switch */
+        }
+        
+
+
+        /****** CIRCULAR ELEMENT STYLING ******/
+
+        /* Styling for the circular element within the toggle switch when the theme is dark */
+        .theme-dark .sliderRound:before {
+            background-color: #0E0D0D; /* Sets the background color of the circular element when in dark mode*/
+        }
+        
+        /* Styling for the circular element within the toggle switch when theme is light */
+        .sliderRound:before {
+            content: ""; /* Inserts content before the circular element */
+
+            position: relative;
+            left: 3px; 
+
+            height: 50px; /* Sets the height of the circular element */
+            width: 140px; /* Sets the width of the circular element */
+            
+            background-color: #C0C0C0; /* Sets the background color of the circular element when in light mode */
+            
+            border-radius: 50%; /* Sets the border radius of the circular element */
+            transition: transform 0.3s cubic-bezier(0.25, 0.5, 0.75, 1); /* Adds transition effects to the circular element */
+        }
+        
+        /*Styling for the circular element within the toggleSwitch when the input is checked */
+        input:checked + .sliderRound:before{
+            transform: translateX(150%) scale(1.0); /*Sets the transform properties of the circular element when input is checked */
+        }
+
+
+        /**********************/
+        /*   mainInfo Styles  */
+        /**********************/
+        
+        .mainColumn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-info {
+            grid-area: main-info;
+            align-self: end;
+            margin-bottom: -50px;
+        }
+
+        .main-info h1,
+        .main-info h2,
+        .main-info h3 {
+            text-align: center;
+            font-weight: 400;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            
+        } 
+        
+        .main-info h1 {
+            font-size: 190px;
+            line-height: 0;
+        }
+        
+        .main-info h2 {
+            font-size: 64px;
+            line-height: 0.5;
+        }
+        
+        .main-info h3 {
+            font-size: 36px;
+            line-height: 0.25;
+        }
+               
+        
+        /****************************/
+        /*   hourlyWeather styles   */
+        /****************************/
+
+        .hourlyColumn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hourly-weather-box {
+            grid-area: hourly-weather-box;
+            width: 90%;
+        }
+
+        .hourly-weather-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            /*box design*/
+            height: 200px;
+            flex-shrink: 0;
+            border-radius: 30px;
+            
+            background: #8A8A8A;
+            box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .hourly-weather-item {
+            width: calc(20% - 2%); /* Adjust the width of the items */
+            box-sizing: border-box; /* Include margins within the width */
+            position: relative;
+            left: 4%;
+        }
+
+        
+        /********************************/
+        /*   rightSideMainInfo Styles   */
+        /********************************/
+
+        .rightMainColumn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+       
+        .right-side-main-info {
+            grid-area: right-side-main-info;
+            margin-bottom: -50px;
+        }
+
+        .right-side-main-info-list-firstHalf {
+            width: 436px;
+            height: 142px;
+            margin: 0 12px 0 12px;
+            flex-shrink: 0;
+            border-radius: 30px;
+            background: #8A8A8A;  
+        }
+
+        .right-side-main-info-list-secondHalf {
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        .right-side-main-info h1 {
+            font-size: 48px;
+            text-align: center;
+            margin: 0px;
+
+        }
+        
+        .right-side-main-info h2{
+            font-size: 25px;
+            text-align: center;
+            margin: 0px;
+        }
+        
+        
+        /*****************************/
+        /*   weeklyForecast Styles   */
+        /*****************************/
+
+        .forecastTitle {
+            display: none;
+        }
+
+        .weeklyColumn {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+
+        .weekly-forecast-box {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            grid-area: weekly-forecast-box;
+            
+            
+        }
+        
+        .forecast-list {
+            display: grid; /*made a grid for this section, so icon can be 3 per row*/
+            grid-template-columns: 1fr 1fr 1fr; /* 3 columns */
+            grid-gap: 30px; /* Gap between grid items */
+            place-items: center;
+        }
+        
+        .forecast-item {
+            font-size: small;
+            height: 129px;
+            width: 50px;
+
+            text-align: center;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            padding: 5px 15px 5px 6px;
+            margin: 0px 20px 0px 20px; 
+            flex-shrink: 0;
+            border-radius: 999px;
+            background: #8A8A8A;
+        }
+        
+        .forecast-item h3,
+        .forecast-item p {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+    } 
+} 
   
-  /* screen formatting */
-  padding: 20px;
-  margin: 0;
-  padding: 0;
-  
-}
 
-.layout {
-  /* grid layout for the entire app */
-  display: grid;
-
-  /* two columns, first being larger */
-  grid-template-columns: 7fr 3fr;
-
-  grid-template-areas: 
-  /* FIRST ROW */
-  /* '. .'  */ 
-  /* replace each dot with a name, and the section you want to add there, enter in that css "grid-area: name */
-  
-  /* SECOND ROW */
-  'main-info right-side-main-info'
-  /* THIRD ROW */
-  'hourly-weather-box weekly-forecast-box';
-
-  /* Cover the entire viewport height AND width */
-  min-height: 100vh;
-  width: 100vw;
-}
-
-
-/* Second column format */
-.layout > :nth-child(2n) {
-  background-color: #C0C0C0;
-}
-
-
-
-
-
-
-
-/****************************/
-/*   hourlyWeather styles   */
-/****************************/
-
-.hourly-weather-item {
-  width: calc(20% - 2%); /* Adjust the width of the items */
-  box-sizing: border-box; /* Include margins within the width */
-  position: relative;
-  left: 4%;
-}
-
-.hourly-weather-box {
-  grid-area: hourly-weather-box;
- }
-
-.hourly-weather-list{
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /*box design*/
-  width: 90%;
-  height: 60%;
-  flex-shrink: 0;
-  border-radius: 30px;
-  background: #5C5C5C;
-  position: relative;
-  top: 20%;
-  left: 5%;
-}
-
-
-
-
-
-
-
-/*****************************************/
-/* lightModeDarkModeSwitch Styles start  */
-/*****************************************/
-
-/* Styling for SVG icons within a label */
-label svg {
-  z-index: 100; /* Sets the stacking order of SVG icons */
-  opacity: 1; /* Sets the initial opacity of SVG icons */
-  pointer-events: none; /* Prevents SVG icons from receiving pointer events */
-  transition: opacity 0.3s ease-in-out, transform 0.5s ease; /* Adds transition effects to SVG icons */
-}
-
-
-
-/* Styling for the sun SVG icon */
-label svg.sun {
-  display: flex; /* Sets the display type for the sun SVG icon */
-  align-items: center; /* Aligns items along the cross-axis */
-  justify-content: center; /* Aligns items along the main-axis */
-  opacity: 1; /* Sets the opacity of the sun SVG icon */
-  fill: yellow; /* Sets the fill color of the sun SVG icon */
-}
-
-
-/* Styling for the moon SVG icon */
-label svg.moon {
-  display: flex; /* Sets the display type for the moon SVG icon */
-  opacity: 0; /* Sets the initial opacity of the moon SVG icon */
-  fill: #252525; /* Sets the fill color of the moon SVG icon */
-}
-
-
-/* Styling for the sun SVG icon when the input is checked */
-input:checked + label svg.sun {
-  opacity: 0; /* Sets the opacity of the sun SVG icon when input is checked */
-  fill: #bdbdbd; /* Sets the fill color of the sun SVG icon when input is checked */
-}
-
-
-/* Styling for the moon SVG icon when the input is checked */
-input:checked + label svg.moon {
-  opacity: 1; /* Sets the opacity of the moon SVG icon when input is checked */
-}
-
-
-/* Styling for the circular element within the toggle switch when the theme is light */
-.theme-light .sliderRound:before {
-  background-color: #f0f0f0; /* Sets the background color of the circular element to light gray */
-}
-
-
-/* Styling for the toggle switch when the theme is dark */
-.theme-dark .sliderRound {
-  background-color: #333; /* Sets the background color of the toggle switch to dark gray */
-}
-
-
-
-/* Styling for label elements */
-label {
-  width: 25px; /* Sets the width of label elements */
-  height: 25px; /* Sets the height of label elements */
-  display: flex; /* Sets the display type for label elements */
-  justify-content: space-between; /* Aligns items along the main-axis with space between them */
-  align-items: center; /* Aligns items along the cross-axis */
-  background: #ebebeb; /* Sets the background color of label elements */
-  border-radius: 15px; /* Sets the border radius of label elements */
-  box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4); /* Sets the box shadow of label elements */
-  cursor: pointer; /* Sets the cursor type for label elements */
-  transition: background-color 0.3s ease; /* Adds transition effects to the background color of label elements */
-}
-
-
-/* Styling for input elements */
-input {
-  width: 0; /* Sets the width of input elements to 0 */
-  height: 0; /* Sets the height of input elements to 0 */
-  visibility: hidden; /* Hides input elements from the layout */
-}
-
-/* Styling for the light theme */
-.theme-light {
-  background-color: white; /* Sets the background color of the light theme to white */
-  color: black; /* Sets the text color of the light theme to black */
-}
-
-.theme-light .switch-container:before {
-  background-color: white; /* Sets the background color of the toggle switch in the light theme to white */
-}
-
-.theme-light .switch-container input:checked + .switch-container {
-  background-color: white; /* Sets the background color of the checked toggle switch in the light theme to white */
-}
-
-/* Styling for the dark theme */
-.theme-dark {
-  background-color: black; /* Sets the background color of the dark theme to black */
-  color: white; /* Sets the text color of the dark theme to white */
-}
-
-.theme-dark .switch-container:before {
-  background-color: #333; /* Sets the background color of the toggle switch in the dark theme to dark gray */
-}
-
-
-.theme-dark .switch-container input:checked + .switch-container {
-  background-color: #333; /*Sets the background color of the checked toggle switch in the dark theme to dark gray */
-}
-
-
-
-
-/* Styling for the container of the switch */
-.switch-container {
-  display: grid; /* Sets the display type for the switch container to grid */
-  grid-template-columns: 1fr 2fr; /* Defines the columns for the grid layout */
-  justify-items: auto; /* Aligns items along the main-axis */
-  align-items: center; /* Aligns items along the cross-axis */
-  width: 60px; /* Sets the width of the switch container */
-  height: 48px; /* Sets the height of the switch container */
-}
-  
-
-
-/* Styling for the toggle switch */
-.sliderRound {
-  position: absolute; /* Sets the position of the toggle switch */
-  cursor: pointer; /* Sets the cursor type when hovering over the toggle switch */
-  top: 20px; /* Sets the top position of the toggle switch */
-  right: 20px; /* Sets the right position of the toggle switch */
-  width: 72px; /* Sets the width of the toggle switch */
-  height: 38px; /* Sets the height of the toggle switch */
-  background-color: gray; /* Sets the background color of the toggle switch */
-  border-radius: 34px; /* Sets the border radius of the toggle switch */
-  transition: background-color 0.2s ease-in, transform 0.3s ease-out; /* Adds transition effects to the toggle switch */
-}
-
-
-/* Styling for the circular element within the toggle switch */
-.sliderRound:before {
-  content: ""; /* Inserts content before the circular element */
-  position: absolute; /* Sets the position of the circular element */
-  left: 3px; /* Sets the left position of the circular element */
-  height: 34px; /* Sets the height of the circular element */
-  width: 34px; /* Sets the width of the circular element */
-  background-color: white; /* Sets the background color of the circular element */
-  border-radius: 50%; /* Sets the border radius of the circular element */
-  transition: transform 0.3s cubic-bezier(0.25, 0.5, 0.75, 1); /* Adds transition effects to the circular element */
-}
-
-
-
-/*Styling for the circular element within the toggleSwitch when the input is checked */
-input:checked + .sliderRound:before{
-  transform: translateX(90%) scale(1.0); /*Sets the transform properties of the circular element when input is checked */
-}
-
-
-
-/*****************************************/
-/* lightModeDarkModeSwitch Styles end    */
-/*****************************************/
-
-
-
-
-
-
-
-/***********************/
-/*   mainInfo Styles   */
-/***********************/
-
-.main-info h1, .main-info h2, .main-info h3{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 400;
-  
-}
-
-.main-info h1 {
-  font-size: 190px;
-  line-height: 0;
-}
-
-.main-info h2 {
-  font-size: 64px;
-  line-height: 0.5;
-}
-
-.main-info h3 {
-  font-size: 36px;
-  line-height: 0.25;
-}
-
-.main-info {
-  grid-area: main-info;
-  align-self: end;
-  margin-bottom: -50px;
-}
-
-.main-info-list{
-  width: 90%;
-  height: 80%;
-  position: relative;
-  left: 5%;
-}
-
-
-
-
-
-
-
-/********************************/
-/*   rightSideMainInfo Styles   */
-/********************************/
-
-.right-side-main-info-list-secondHalf {
-  position: relative;
-  margin-top: 20%;
-}
-
-
-.right-side-main-info h1 {
-  font-size: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0px;
-  
-}
-
-.right-side-main-info h2{
-  font-size: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin:0px;
-}
-
-.right-side-main-info-list {
-  position: relative;
-  top: 10%;
-}
-
-.right-side-main-info {
-  grid-area: right-side-main-info;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-
-
-
-
-
-/*****************************/
-/*   weeklyForecast Styles   */
-/*****************************/
-
-.weekly-forecast-box {
-  grid-area: weekly-forecast-box;
-}
-
-.forecast-list {
-  display: grid; /*made a grid for this section, so icon can be 3 per row*/
-  grid-template-columns: 1fr 1fr 1fr; /* 3 columns */
-  grid-gap: 10px; /* Gap between grid items */
-  place-items: center;
-}
-
-.forecast-item {
-  height: 169px;
-  width: 60px;
-  padding: 5px 15px 5px 6px;
-  flex-shrink: 0;
-  border-radius: 999px;
-  background: #5C5C5C;
-
-  /* IGNORE THIS FOR NOW */
-
-  /* width: 83px;
-  height: 165px;
-  flex-shrink: 0;
-  background-image: url(images/weeklyForecastItemBackground.png); */
-  
-}
-
-.forecast-item h3, .forecast-item p {
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/**********************/
-/*   Responsiveness   */
-/**********************/
-
-/* TABLET RESPONSIVENESS */
+/*******************************/
+/*    mobile responsiveness    */
+/*******************************/
 
 @media screen and (max-width: 1024px) {
 
-  /************************/
-  /* hourlyWeather styles */
-  /************************/
+    @media screen and (orientation: portrait) {
+        
+        /************************/
+        /*    General Styles    */
+        /************************/
 
-  .hourly-weather-list{
-      width: 90%;
-      height: 50%;
-      font-size: 13px;
-      top: 30%;
-  }
+        .App {
+            color: white;
+            background: linear-gradient(180deg, #141313 1.5%, #141313 13.5%, #141313 21%, #191717 43%, #2B2929 64.5%, #312F2F 89%, #363333 98.01%, #353333 99.99%, #333030 100%, #7A7474 100%), #D9D9D9;
+            padding: 20px;
+            margin: 0;
+            padding: 0;
+            overflow: scroll;
+        }
+        
+        .App::-webkit-scrollbar {
+            display: none;
+        }
+    
+        .layout {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            height: 100vh;
+        }
+    
+        .switch {
+            order: 1;
+        }
+    
+        .mainColumn {
+            order: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
+        .rightMainColumn {
+            order: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+    
+        .hourlyColumn {
+            order: 4;
+        }
+    
+        .weeklyColumn {
+            order: 5;
+        }
+    
+        /***************************/
+        /* lightModeDarkModeSwitch */
+        /***************************/
 
+        /* Styling for SVG icons within a label */
+        label svg {
+            position: relative;
+            right: 5px;
+            opacity: 1; /* Sets the initial opacity of SVG icons */
+            pointer-events: none; /* Prevents SVG icons from receiving pointer events */
+            transition: opacity 0.3s ease-in-out, transform 0.5s ease; /* Adds transition effects to SVG icons */
+        }
+        
+        
+        
+        /* Styling for the sun SVG icon */
+        label svg.sun {
+            display: flex; /* Sets the display type for the sun SVG icon */
+            align-items: center; /* Aligns items along the cross-axis */
+            justify-content: center; /* Aligns items along the main-axis */
+            opacity: 1; /* Sets the opacity of the sun SVG icon */
+        }
+        
+        
+        /* Styling for the moon SVG icon */
+        label svg.moon {
+            display: flex; /* Sets the display type for the moon SVG icon */
+            opacity: 0; /* Sets the initial opacity of the moon SVG icon */
+            fill: #252525; /* Sets the fill color of the moon SVG icon */
+            position: relative;
+            right: 20px;
+        }
+        
+        
+        /* Styling for the sun SVG icon when the input is checked */
+        input:checked + label svg.sun {
+            opacity: 0; /* Sets the opacity of the sun SVG icon when input is checked */
+            fill: #bdbdbd; /* Sets the fill color of the sun SVG icon when input is checked */
+        }
+        
+        
+        /* Styling for the moon SVG icon when the input is checked */
+        input:checked + label svg.moon {
+            opacity: 1; /* Sets the opacity of the moon SVG icon when input is checked */
+        }
+        
+        /* Styling for label elements */
+        label {
+            display: flex; /* Sets the display type for label elements */
+            align-items: center; /* Aligns items along the cross-axis */
+            border-radius: 15px; /* Sets the border radius of label elements */
+            transition: background-color 0.3s ease; /* Adds transition effects to the background color of label elements */
+        }
 
+        /* Styling for input elements */
+        input {
+            width: 0; /* Sets the width of input elements to 0 */
+            height: 0; /* Sets the height of input elements to 0 */
+            visibility: hidden; /* Hides input elements from the layout */
+        }
+        
+        
+        /* Styling for the light theme */
+        .theme-light {
+            background: linear-gradient(180deg, #FFF 0%, #D0D0D0 50.77%, #A3A3A3 99.98%, #7E7E7E 99.99%, #737373 100%); /* Sets the background color of the light theme*/
+            color: black; /* Sets the text color of the light theme */
+        }
 
-  /*******************/
-  /* mainInfo Styles */
-  /*******************/
+        .theme-light .hourly-weather-list,
+        .theme-light .forecast-item {
+            background: #FFF9F9;
+        }
+        
+        .theme-light .main-info,
+        .theme-light .forecast-item  {
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Styling for the container of the switch */
+        .switch-container {
+            display: flex;
+            justify-content: right;
+            align-items: center;
 
-  .main-info h1 {
-      font-size: 90px;
-  }
+            padding-top: 10px;
+            padding-right: 10px;
+        }
+        
+
+        /****** TOGGLE SWITCH STYLING ******/
+        
+        /* Styling for the toggle switch when the theme is light */
+        .theme-light .sliderRound {
+            background-color: #0E0D0D /* Sets the background color of the toggle switch when in light mode */
+        }
+
+        /* Styling for the toggle switch when theme is dark */
+        .sliderRound {
+            cursor: pointer; /* Sets the cursor type when hovering over the toggle switch */
+
+            width: 84px; /* Sets the width of the toggle switch */
+            height: 38px; /* Sets the height of the toggle switch */
+            
+            background-color: #C0C0C0; /* Sets the background color of the toggle switch */
+           
+            border-radius: 34px; /* Sets the border radius of the toggle switch */
+            transition: background-color 0.2s ease-in, transform 0.3s ease-out; /* Adds transition effects to the toggle switch */
+        }
+        
+        
+        /****** CIRCULAR ELEMENT STYLING ******/
+
+        /* Styling for the circular element within the toggle switch when the theme is dark */
+        .theme-dark .sliderRound:before {
+            background-color: #0E0D0D; /* Sets the background color of the circular element when in dark mode */
+        }
+        
+        /* Styling for the circular element within the toggle switch when theme is light */
+        .sliderRound:before {
+            content: ""; /* Inserts content before the circular element */
+
+            position: relative;
+            left: 3px; 
+
+            height: 30px; /* Sets the height of the circular element */
+            width: 120px; /* Sets the width of the circular element */
+            
+            background-color: #C0C0C0; /* Sets the background color of the circular element */
+            
+            border-radius: 50%; /* Sets the border radius of the circular element */
+            transition: transform 0.3s cubic-bezier(0.25, 0.5, 0.75, 1); /* Adds transition effects to the circular element */
+        }
+        
+        /*Styling for the circular element within the toggleSwitch when the input is checked */
+        input:checked + .sliderRound:before{
+            transform: translateX(170%) scale(1.0); /*Sets the transform properties of the circular element when input is checked */
+        }
   
-  .main-info h2 {
-      font-size: 36px;
-  }
-  
-  .main-info h3 {
-      font-size: 30px;
-  }
-  
-  .main-info-list{
-      width: 90%;
-      height: 80%;
-      margin-bottom: -40px;
-  }
+
+        /**********************/
+        /*   mainInfo Styles  */
+        /**********************/
+    
+        .main-info {
+            text-align: center;
+        }
+    
+        .main-info h1 {
+            font-size: 130px;
+            position: relative;
+            bottom: 10px;
+        }
+    
+        .main-info h2 {
+            font-size: 45px;
+            position: relative;
+            bottom: 10px;
+            font-weight: 400;
+        }
+    
+        .main-info h3 {
+            font-size: 25px;
+            position: relative;
+            bottom: 10px;
+        }
+    
+        .main-info-list {
+            line-height: 4px;
+        }
 
 
+        /********************************/
+        /*   rightSideMainInfo Styles   */
+        /********************************/
 
+        .rightMainColumn .right-side-main-info-list-firstHalf {
+            display: none;
+        }  
+    
+        
+        /****************************/
+        /*   hourlyWeather styles   */
+        /****************************/
+    
+        .hourly-weather-box {
+            padding: 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .hourly-weather-item {
+            text-align: center;
+            font-size: 12px;
+            width: calc(20% - 2%); /* Adjust the width of the items */
+            box-sizing: border-box; /* Include margins within the width */
+            position: relative;
+            left: 4%;
+        }
+    
+        .hourly-weather-list {
+            /*box design*/
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 150px;
+            flex-shrink: 0;
+            border-radius: 30px;
+            background: #8a8a8a;
+            position: relative;
+        }
+    
+    
+        /*****************************/
+        /*   weeklyForecast Styles   */
+        /*****************************/
 
-  /****************************/
-  /* rightSideMainInfo Styles */
-  /****************************/
-  
-  .right-side-main-info h1 {
-      font-size: 25px;
-  }
-  
-  .right-side-main-info h2{
-      font-size: 20px;
-  }
-  
+        .forecastTitle {
+            font-size: 30px;
+            margin-left: 20px;
+        }
 
+        .weekly-forecast-box {
+            padding: 10px;
+        }
+    
+        .forecast-list {
+            padding: 1em;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            overflow-x: auto;
+            grid-gap: 30px;
+            position: relative;
+            place-items: center;
+        }
 
-  
-  /**************************/
-  /* weeklyForecast Styles  */
-  /**************************/
-  
-  .weekly-forecast-box {
-      display: grid;
-      place-items: center;
-  }
-  
-  .forecast-item {
-      font-size: 10px;
-  
-      height: 103px;
-      width: 35px;
-      
-  }
-}
-
-/**********************/
-/* Responsiveness end */
-/**********************/
+        .forecast-list::-webkit-scrollbar {
+            display: none;
+        }
+    
+        .forecast-item {
+            text-align: center;
+            font-size: 14px;
+            height: 129.863px;
+            width: 46.537px;
+            padding: 5px 15px 5px 6px;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+    
+            border-radius: 999px;
+            background: #8A8A8A;
+            box-shadow: 8px 7px 8.8px -1px rgba(0, 0, 0, 0.25);
+        }
+    
+    }
+}  

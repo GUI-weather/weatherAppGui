@@ -28,7 +28,7 @@ function App() {
   }
 
   //themeClass determines the CSS class to apply based on the current theme.
-  const themeClass = isLightTheme ? "theme-dark" : "theme-light";
+  const themeClass = isLightTheme ? "theme-light" : "theme-dark";
 
   const city = 'Krakow'; // this should be based on user location as the time is taken from where the user is 
 
@@ -37,11 +37,11 @@ function App() {
   return (
     <div className={`App ${themeClass}`}>
       <div className="layout">
-        <ToggleSwitch toggleTheme={toggleTheme} isLightTheme={isLightTheme} />
-        <MainInfo city={city} />
-        <RightSideMainInfo city={city}/>
-        <HourlyWeatherBox city={city}/>
-        <WeeklyForecast city={city}/>
+        <div className='switch'><ToggleSwitch toggleTheme={toggleTheme} isLightTheme={isLightTheme} /></div>
+        <div className='mainColumn'><MainInfo city={city} /></div>
+        <div className='rightMainColumn'><RightSideMainInfo city={city}/></div>
+        <div className='hourlyColumn'><HourlyWeatherBox city={city}/></div>
+        <div className='weeklyColumn'><WeeklyForecast city={city}/></div>
       </div>
     </div>
   );

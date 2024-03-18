@@ -23,17 +23,16 @@ function RightSideMainInfo({ city }) {
   const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
   const formattedTime = `${formattedHours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
 
-  // CHANGE BY ALESHA: added div right-side-main-info-list, firstHalf and secondHalf, and changed first two lines to h1 not h2
   return (
     <div className="right-side-main-info">
       <div className="right-side-main-info-list">
         <div className="right-side-main-info-list-firstHalf">
-          <h1>{greeting}</h1>
-          <h1>{formattedTime}</h1>
+          <h1 className='greeting'>{greeting}</h1>
+          <h1 className="time">{formattedTime}</h1>
         </div>
         <div className="right-side-main-info-list-secondHalf">
-          <h2>Humidity: {humidity} %</h2>
-          <h2>Pressure: {pressure} Pa</h2>
+          <h2 className="humidity">Humidity : {humidity} %</h2>
+          <h2 className="pressure">Pressure : {pressure} Pa</h2>
         </div>
       </div>
     </div>
