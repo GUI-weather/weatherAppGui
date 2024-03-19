@@ -7,7 +7,7 @@ import HourlyWeatherBox from './components/hourlyWeather';
 import WeeklyForecast from './components/weeklyForecast';
 import ToggleSwitch from './components/lightModeDarkModeSwitch';
 import CalendarPage from './components/Calendar'; 
-import buttonIcon from './component/button-icon.png'; 
+import buttonIcon from './component/button-icon.svg'; 
 import InteractiveButton from './component/InteractiveButton'; 
 
 function App() {
