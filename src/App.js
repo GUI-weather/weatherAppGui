@@ -6,6 +6,9 @@ import RightSideMainInfo from './components/rightSideMainInfo';
 import HourlyWeatherBox from './components/hourlyWeather';
 import WeeklyForecast from './components/weeklyForecast';
 import ToggleSwitch from './components/lightModeDarkModeSwitch';
+import CalendarPage from './components/Calendar'; 
+import buttonIcon from './component/button-icon.png'; 
+import InteractiveButton from './component/InteractiveButton'; 
 
 function App() {
 
@@ -27,8 +30,21 @@ function App() {
       console.log("Location is not available in your browser. Please use a different browser to get the full experience.");
     }
   }, []); // Empty dependency array to ensure useEffect only runs once
+  
+  function App() {
+  const handleButtonClick = () => {
+    // Handle button click event here
+    console.log('Button clicked!');
+  };
 
-
+  return (
+    <div className="App">
+      <h1>Calendar</h1>
+      <CalendarPage />
+      <InteractiveButton onClick={handleButtonClick} icon={buttonIcon} />
+    </div>
+  );
+}
 
   //useState is a React Hook used for managing state in functional components.
   //It initializes the state variable isLightTheme and a function setIsLightTheme to update.
