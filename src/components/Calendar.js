@@ -1,3 +1,16 @@
+import React from 'react';
+
+// InteractiveButton component
+const InteractiveButton = ({ onClick, icon }) => {
+  return (
+    <button className="interactive-button" onClick={onClick}>
+      <img src={icon} alt="Button Icon" />
+    </button>
+  );
+};
+
+export default InteractiveButton;
+
 // Define isSameDate function
 const isSameDate = (date1, date2) => {
   return (
