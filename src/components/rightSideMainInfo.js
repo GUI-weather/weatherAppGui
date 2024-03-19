@@ -1,8 +1,8 @@
 import React from 'react';
 import { useWeatherData } from './ApiManager';
 
-function RightSideMainInfo({ city }) {
-  const { weatherData, error } = useWeatherData(city);
+function RightSideMainInfo({ lat, long  }) {
+  const { weatherData, error } = useWeatherData(lat, long );
 
   if (error) {
     return <div>Error: {error.message}</div>;

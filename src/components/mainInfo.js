@@ -2,8 +2,8 @@ import React from 'react';
 import { useWeatherData } from './ApiManager';
 import { kelvinToCelsius } from './reusable';
 
-function MainInfo({ city }) {
-    const { weatherData, error } = useWeatherData(city); // Fetch weather data for the specified city
+function MainInfo({ lat,long }) {
+    const { weatherData, error } = useWeatherData(lat,long ); // Fetch weather data for the specified city
 
     if (error) {
         return <div>Error: {error.message}</div>;

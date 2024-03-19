@@ -3,10 +3,10 @@ import { useWeatherData } from './ApiManager';
 import { kelvinToCelsius } from './reusable';
 
 
-function WeeklyForecast({ city }) {
-    const { dailyForecastData } = useWeatherData(city);
+function WeeklyForecast({ lat, long  }) {
+    const { dailyForecastData } = useWeatherData(lat, long );
 
-    if (!dailyForecastData) {
+    if (!dailyForecastData || !dailyForecastData.list) {
         return <div>Loading...</div>;
     }
 

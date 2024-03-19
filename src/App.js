@@ -1,14 +1,34 @@
 // App.js
 import './App.css'; // single css file used for all components
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MainInfo from './components/mainInfo';
 import RightSideMainInfo from './components/rightSideMainInfo';
 import HourlyWeatherBox from './components/hourlyWeather';
 import WeeklyForecast from './components/weeklyForecast';
-import ToggleSwitch from './components/lightModeDarkModeSwithc';
+import ToggleSwitch from './components/lightModeDarkModeSwitch';
 
 function App() {
+
+  const [lat, setLat] = useState(null); // State variable to store latitude
+  const [long, setLong] = useState(null); // State variable to store longitude
   
+  useEffect(() => {
+    // Check if geolocation is supported by the browser
+    if ("geolocation" in navigator) {
+      // Get current position using geolocation
+      navigator.geolocation.getCurrentPosition(function (position) {
+        // Update latitude state with current latitude
+        setLat(position.coords.latitude);
+        // Update longitude state with current longitude
+        setLong(position.coords.longitude);
+      });
+    } else {
+      // Log a message if geolocation is not available in the browser
+      console.log("Location is not available in your browser. Please use a different browser to get the full experience.");
+    }
+  }, []); // Empty dependency array to ensure useEffect only runs once
+
+
 
   //useState is a React Hook used for managing state in functional components.
   //It initializes the state variable isLightTheme and a function setIsLightTheme to update.
@@ -30,18 +50,15 @@ function App() {
   //themeClass determines the CSS class to apply based on the current theme.
   const themeClass = isLightTheme ? "theme-light" : "theme-dark";
 
-  const city = 'Krakow'; // this should be based on user location as the time is taken from where the user is 
-
-
   //The JSX includes the ToggleSwitch component with toggleTheme and isLightTheme props.
   return (
     <div className={`App ${themeClass}`}>
       <div className="layout">
         <div className='switch'><ToggleSwitch toggleTheme={toggleTheme} isLightTheme={isLightTheme} /></div>
-        <div className='mainColumn'><MainInfo city={city} /></div>
-        <div className='rightMainColumn'><RightSideMainInfo city={city}/></div>
-        <div className='hourlyColumn'><HourlyWeatherBox city={city}/></div>
-        <div className='weeklyColumn'><WeeklyForecast city={city}/></div>
+        <div className='mainColumn'><MainInfo lat={lat} long={long} /></div>
+        <div className='rightMainColumn'><RightSideMainInfo lat={lat} long={long}/></div>
+        <div className='hourlyColumn'><HourlyWeatherBox lat={lat} long={long}/></div>
+        <div className='weeklyColumn'><WeeklyForecast lat={lat} long={long}/></div>
       </div>
     </div>
   );

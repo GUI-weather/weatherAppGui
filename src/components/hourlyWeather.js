@@ -2,10 +2,10 @@ import React from 'react';
 import { useWeatherData } from './ApiManager';
 import { kelvinToCelsius } from './reusable';
 
-function HourlyWeatherBox({ city }) {
-  const { forecastData } = useWeatherData(city);
+function HourlyWeatherBox({ lat, long }) {
+  const { forecastData } = useWeatherData(lat, long );
 
-  if (!forecastData) {
+  if (!forecastData || !forecastData.list) {
     return <div>Loading...</div>;
   }
 
