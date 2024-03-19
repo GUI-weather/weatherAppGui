@@ -6,14 +6,14 @@ import RightSideMainInfo from './components/rightSideMainInfo';
 import HourlyWeatherBox from './components/hourlyWeather';
 import WeeklyForecast from './components/weeklyForecast';
 import ToggleSwitch from './components/lightModeDarkModeSwitch';
-import CalendarPage from './components/Calendar'; 
-import buttonIcon from './component/button-icon.svg'; 
-import InteractiveButton from './component/InteractiveButton'; 
+import InteractiveButton from './components/InteractiveButton';
+
 
 function App() {
 
   const [lat, setLat] = useState(null); // State variable to store latitude
   const [long, setLong] = useState(null); // State variable to store longitude
+  const handleButtonClick = () => {console.log('Button clicked!');};
   
   useEffect(() => {
     // Check if geolocation is supported by the browser
@@ -31,12 +31,6 @@ function App() {
     }
   }, []); // Empty dependency array to ensure useEffect only runs once
   
-  function App() {
-  const handleButtonClick = () => {
-    // Handle button click event here
-    console.log('Button clicked!');
-  };
-
   return (
     <div className="App">
       <h1>Calendar</h1>
