@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // InteractiveButton component
 const InteractiveButton = ({ onClick, icon }) => {
@@ -9,7 +9,7 @@ const InteractiveButton = ({ onClick, icon }) => {
   );
 };
 
-export default InteractiveButton;
+export { InteractiveButton };
 
 // Define isSameDate function
 const isSameDate = (date1, date2) => {
@@ -36,6 +36,8 @@ function CalendarPage() {
     JSON.parse(localStorage.getItem('calendarNotes')) || {}
   );
   const [searchDate, setSearchDate] = useState('');
+  const [calendar, setCalendar] = useState([]); // State variable for calendar
+  const [monthlyReview, setMonthlyReview] = useState([]); // State variable for monthly review
 
   useEffect(() => {
     generateCalendar(currentYear, currentMonth);
@@ -66,7 +68,7 @@ function CalendarPage() {
       });
     }
 
-    setCalendar(calendarDays);
+    setCalendar(calendarDays); // Set calendar state
   };
 
   const generateMonthlyNotesOverview = () => {
@@ -81,44 +83,7 @@ function CalendarPage() {
       }
     });
 
-    setMonthlyReview(monthlyReview);
-  };
-
-  const handleDayClick = (date) => {
-    const formattedDate = formatDate(date);
-    if (notes[formattedDate]) {
-    } else {
-    }
-  };
-
-  const handleNoteItemClick = (date) => {
-    const formattedDate = formatDate(date);
-    if (notes[formattedDate]) {
-    }
-  };
-
-  const saveNote = (date, noteContent) => {
-    const formattedDate = formatDate(date);
-    setNotes((prevNotes) => ({
-      ...prevNotes,
-      [formattedDate]: noteContent,
-    }));
-    localStorage.setItem(
-      'calendarNotes',
-      JSON.stringify({
-        ...notes,
-        [formattedDate]: noteContent,
-      })
-    );
-    generateMonthlyNotesOverview();
-  };
-
-  const deleteNote = (date) => {
-    const formattedDate = formatDate(date);
-    const { [formattedDate]: omit, ...updatedNotes } = notes;
-    setNotes(updatedNotes);
-    localStorage.setItem('calendarNotes', JSON.stringify(updatedNotes));
-    generateMonthlyNotesOverview();
+    setMonthlyReview(monthlyReview); // Set monthly review state
   };
 
   const previousMonth = () => {
@@ -147,12 +112,6 @@ function CalendarPage() {
     });
   };
 
-  const goToCurrentMonth = () => {
-    const today = new Date();
-    setCurrentYear(today.getFullYear());
-    setCurrentMonth(today.getMonth());
-  };
-
   const handleSearchDateChange = (event) => {
     setSearchDate(event.target.value);
   };
@@ -166,6 +125,12 @@ function CalendarPage() {
         setCurrentMonth(parseInt(month) - 1);
       }
     }
+  };
+
+  const goToCurrentMonth = () => {
+    const today = new Date();
+    setCurrentYear(today.getFullYear());
+    setCurrentMonth(today.getMonth());
   };
 
   return (
@@ -202,3 +167,5 @@ function CalendarPage() {
     </div>
   );
 }
+
+export default CalendarPage;
