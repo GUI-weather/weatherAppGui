@@ -7,14 +7,12 @@ import HourlyWeatherBox from './components/hourlyWeather';
 import WeeklyForecast from './components/weeklyForecast';
 import ToggleSwitch from './components/lightModeDarkModeSwitch';
 import InteractiveButton from './components/InteractiveButton';
-
+import buttonIcon from './button-icon.svg'; // Importing the button icon
 
 function App() {
-
   const [lat, setLat] = useState(null); // State variable to store latitude
   const [long, setLong] = useState(null); // State variable to store longitude
-  const handleButtonClick = () => {console.log('Button clicked!');};
-  
+
   useEffect(() => {
     // Check if geolocation is supported by the browser
     if ("geolocation" in navigator) {
@@ -30,15 +28,11 @@ function App() {
       console.log("Location is not available in your browser. Please use a different browser to get the full experience.");
     }
   }, []); // Empty dependency array to ensure useEffect only runs once
-  
-  return (
-    <div className="App">
-      <h1>Calendar</h1>
-      <CalendarPage />
-      <InteractiveButton onClick={handleButtonClick} icon={buttonIcon} />
-    </div>
-  );
-}
+
+  // Placeholder function for handleButtonClick
+  const handleButtonClick = () => {
+    console.log('Button clicked!');
+  };
 
   //useState is a React Hook used for managing state in functional components.
   //It initializes the state variable isLightTheme and a function setIsLightTheme to update.
@@ -70,6 +64,7 @@ function App() {
         <div className='hourlyColumn'><HourlyWeatherBox lat={lat} long={long}/></div>
         <div className='weeklyColumn'><WeeklyForecast lat={lat} long={long}/></div>
       </div>
+      <InteractiveButton onClick={handleButtonClick} icon={buttonIcon} />
     </div>
   );
 }
