@@ -29,11 +29,6 @@ function App() {
     }
   }, []); // Empty dependency array to ensure useEffect only runs once
 
-  // Placeholder function for handleButtonClick
-  const handleButtonClick = () => {
-    window.location.href = "CalendarBox.js";
-  };
-
   //useState is a React Hook used for managing state in functional components.
   //It initializes the state variable isLightTheme and a function setIsLightTheme to update.
   //The initial state is determined by checking the value stored in the localStorage with the key 'theme'
@@ -53,6 +48,12 @@ function App() {
 
   //themeClass determines the CSS class to apply based on the current theme.
   const themeClass = isLightTheme ? "theme-light" : "theme-dark";
+
+  // Placeholder function for handleButtonClick
+  const handleButtonClick = () => {
+    window.location.href = "CalendarBox.js";
+  };
+
 
   //The JSX includes the ToggleSwitch component with toggleTheme and isLightTheme props.
   return (
