@@ -7,8 +7,7 @@ import HourlyWeatherBox from './components/hourlyWeather';
 import WeeklyForecast from './components/weeklyForecast';
 import ToggleSwitch from './components/lightModeDarkModeSwitch';
 import Modal from 'react-modal';
-import Calendar from './components/CalendarBox'; 
-import calendarIcon from './images/calendar.svg'
+import Calendar from './CalendarBox'; // adjust the 
 
 function App() {
 
@@ -21,6 +20,7 @@ function App() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
 
   const [lat, setLat] = useState(null); // State variable to store latitude
   const [long, setLong] = useState(null); // State variable to store longitude
@@ -71,11 +71,15 @@ function App() {
   return (
     <div className={`App ${themeClass}`}>
       <div className="layout">
-        <img src={calendarIcon} alt="Calendar" onClick={openModal} />
-        <Modal isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Calendar Modal">
-          <Calendar/>
-          <button onClick={closeModal}>Close</button>
-        </Modal>
+      <button onClick={openModal}>Open Calendar</button>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Calendar Modal"
+      >
+        <Calendar />
+        <button onClick={closeModal}>Close</button>
+      </Modal>
         <div className='switch'><ToggleSwitch toggleTheme={toggleTheme} isLightTheme={isLightTheme} /></div>
         <div className='mainColumn'><MainInfo lat={lat} long={long} /></div>
         <div className='rightMainColumn'><RightSideMainInfo lat={lat} long={long}/></div>

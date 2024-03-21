@@ -6,20 +6,16 @@ import RightSideMainInfo from './components/rightSideMainInfo';
 import HourlyWeatherBox from './components/hourlyWeather';
 import WeeklyForecast from './components/weeklyForecast';
 import ToggleSwitch from './components/lightModeDarkModeSwitch';
-import Modal from 'react-modal';
-import Calendar from './components/CalendarBox'; 
-import calendarIcon from './images/calendar.svg'
+import buttonIcon from './images/2867870_calander_icon.png'; 
+import CalendarPage from './components/Calendar';
+import Calendar from './components/CalendarBox'; // adjust the path as needed
 
 function App() {
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const toggleCalendar = () => {
+    setShowCalendar(!showCalendar);
   };
 
   const [lat, setLat] = useState(null); // State variable to store latitude
@@ -71,11 +67,12 @@ function App() {
   return (
     <div className={`App ${themeClass}`}>
       <div className="layout">
-        <img src={calendarIcon} alt="Calendar" onClick={openModal} />
-        <Modal isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Calendar Modal">
-          <Calendar/>
-          <button onClick={closeModal}>Close</button>
-        </Modal>
+      <div>
+      <button onClick={toggleCalendar}>
+        {showCalendar ? 'Hide Calendar' : 'Show Calendar'}
+      </button>
+      {showCalendar && <Calendar />}
+    </div>
         <div className='switch'><ToggleSwitch toggleTheme={toggleTheme} isLightTheme={isLightTheme} /></div>
         <div className='mainColumn'><MainInfo lat={lat} long={long} /></div>
         <div className='rightMainColumn'><RightSideMainInfo lat={lat} long={long}/></div>

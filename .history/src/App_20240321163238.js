@@ -8,7 +8,6 @@ import WeeklyForecast from './components/weeklyForecast';
 import ToggleSwitch from './components/lightModeDarkModeSwitch';
 import Modal from 'react-modal';
 import Calendar from './components/CalendarBox'; 
-import calendarIcon from './images/calendar.svg'
 
 function App() {
 
@@ -71,9 +70,9 @@ function App() {
   return (
     <div className={`App ${themeClass}`}>
       <div className="layout">
-        <img src={calendarIcon} alt="Calendar" onClick={openModal} />
+        <button onClick={openModal}>Open Calendar</button>
         <Modal isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Calendar Modal">
-          <Calendar/>
+        <Calendar/>
           <button onClick={closeModal}>Close</button>
         </Modal>
         <div className='switch'><ToggleSwitch toggleTheme={toggleTheme} isLightTheme={isLightTheme} /></div>

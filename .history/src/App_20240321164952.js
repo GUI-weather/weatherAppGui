@@ -71,7 +71,7 @@ function App() {
   return (
     <div className={`App ${themeClass}`}>
       <div className="layout">
-        <img src={calendarIcon} alt="Calendar" onClick={openModal} />
+        <img src="calendarIcon" alt="Calendar" onClick={openModal} />
         <Modal isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Calendar Modal">
           <Calendar/>
           <button onClick={closeModal}>Close</button>
