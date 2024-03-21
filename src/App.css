@@ -1,7 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu+Mono&family=VT323&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Kanit:wght@300&display=swap');
-
-
 
 /*
 Table of contents 
@@ -34,6 +30,51 @@ h1, h2, p, h3, h4{
     font-weight: 500;
 }
 
+/* Popup.css */
+/* .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup h2{
+    text-align: center;
+  }
+  
+  .popup-content {
+    margin: 30px;
+    background-color: black;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #eee;
+  } */
+  
+
+.theme-dark svg path{
+    color: white;
+}
 
 /**********************************/
 /*    landscape responsiveness    */
@@ -308,11 +349,21 @@ h1, h2, p, h3, h4{
 
         .hourly-weather-item {
             width: calc(20% - 2%); /* Adjust the width of the items */
+            text-align: center;
             box-sizing: border-box; /* Include margins within the width */
             position: relative;
-            left: 4%;
+            font-size: larger;
         }
 
+        .hourly-weather-item:nth-child(1),
+        .hourly-weather-item:nth-child(2),
+        .hourly-weather-item:nth-child(3),
+        .hourly-weather-item:nth-child(4),
+        .hourly-weather-item:nth-child(5) {
+            margin: 10px;
+            border-radius: 99px;
+            background: #ababab;
+        }
         
         /********************************/
         /*   rightSideMainInfo Styles   */
@@ -400,15 +451,16 @@ h1, h2, p, h3, h4{
             align-items: center;
             flex-direction: column;
 
-            padding: 5px 15px 5px 6px;
+            padding: 5px 12px 5px 12px;
             margin: 0px 20px 0px 20px; 
             flex-shrink: 0;
             border-radius: 999px;
             background: #8A8A8A;
         }
-        
+    
         .forecast-item h3,
         .forecast-item p {
+            font-weight: bold;
             display: flex;
             justify-content: center;
             align-items: center; 
@@ -421,7 +473,7 @@ h1, h2, p, h3, h4{
 /*    mobile responsiveness    */
 /*******************************/
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1440px) {
 
     @media screen and (orientation: portrait) {
         
@@ -536,7 +588,6 @@ h1, h2, p, h3, h4{
             height: 0; /* Sets the height of input elements to 0 */
             visibility: hidden; /* Hides input elements from the layout */
         }
-        
         
         /* Styling for the light theme */
         .theme-light {
@@ -654,6 +705,13 @@ h1, h2, p, h3, h4{
         .rightMainColumn .right-side-main-info-list-firstHalf {
             display: none;
         }  
+
+        .right-side-main-info-list-secondHalf {
+            text-align: center;
+            font-size: 20px;
+            position: relative;
+            top: -10px;
+        }
     
         
         /****************************/
@@ -668,16 +726,16 @@ h1, h2, p, h3, h4{
         }
     
         .hourly-weather-item {
-            text-align: center;
-            font-size: 12px;
             width: calc(20% - 2%); /* Adjust the width of the items */
+            text-align: center;
             box-sizing: border-box; /* Include margins within the width */
             position: relative;
-            left: 4%;
+            font-size: 12px;
         }
     
         .hourly-weather-list {
             /*box design*/
+            overflow-x: scroll;
             display: flex;
             align-items: center;
             width: 100%;
@@ -686,6 +744,20 @@ h1, h2, p, h3, h4{
             border-radius: 30px;
             background: #8a8a8a;
             position: relative;
+        }
+
+        .hourly-weather-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hourly-weather-item:nth-child(1),
+        .hourly-weather-item:nth-child(2),
+        .hourly-weather-item:nth-child(3),
+        .hourly-weather-item:nth-child(4),
+        .hourly-weather-item:nth-child(5) {
+            margin: 10px;
+            border-radius: 99px;
+            background: #ababab;
         }
     
     
@@ -721,7 +793,7 @@ h1, h2, p, h3, h4{
             font-size: 14px;
             height: 129.863px;
             width: 46.537px;
-            padding: 5px 15px 5px 6px;
+            padding: 5px 12px 5px 12px;
             justify-content: center;
             align-items: center;
             flex-shrink: 0;
