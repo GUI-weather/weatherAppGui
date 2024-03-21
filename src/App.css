@@ -10,6 +10,7 @@ Table of contents
     2.4) hourlyWeather
     2.5) rightSideMainInfo
     2.6) weeklyForecast
+    2.7) calendar icon
 3) mobile responsiveness
     2.1) general styles
     2.2) lightModeDarkModeSwitch
@@ -17,6 +18,7 @@ Table of contents
     2.4) rightSideMainInfo
     2.5) hourlyWeather
     2.6) weeklyForecast
+    2.7) calendar icon
 ################################
 */
 
@@ -105,7 +107,7 @@ h1, h2, p, h3, h4{
         
             grid-template-areas: 
             /* first switch needs to be replaced for calander implementation */
-            'switch switch'  
+            'l-switch r-switch'  
             /* SECOND ROW */
             'main-info right-side-main-info'
             /* THIRD ROW */
@@ -126,7 +128,7 @@ h1, h2, p, h3, h4{
         /***************************/
 
         .switch {
-            grid-area: switch;
+            grid-area: r-switch;
 
             display: flex;
             justify-content: right;
@@ -465,6 +467,26 @@ h1, h2, p, h3, h4{
             justify-content: center;
             align-items: center; 
         }
+        
+        /***************************/
+        /* calendar icon */
+        /***************************/
+
+        .InteractiveButton {
+            grid-area: l-switch;
+
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+
+        .buttonIcon {
+            width: auto; /* Set width relative to 10% of the viewport width */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Ensure proper rendering as a block element */
+            margin: 0 auto; /* Center the SVG horizontally */
+            cursor: pointer; /* Change cursor to pointer on hover for indicating clickability */
+        }
     } 
 } 
   
@@ -802,6 +824,10 @@ h1, h2, p, h3, h4{
             background: #8A8A8A;
             box-shadow: 8px 7px 8.8px -1px rgba(0, 0, 0, 0.25);
         }
+
+        /********************************/
+        /*   calendar icon   */
+        /********************************/
     
     }
 }  
