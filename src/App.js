@@ -60,29 +60,18 @@ function App() {
   //themeClass determines the CSS class to apply based on the current theme.
   const themeClass = isLightTheme ? "theme-light" : "theme-dark";
 
-  // Placeholder function for handleButtonClick
-  const handleButtonClick = () => {
-    window.location.href = "CalendarBox.js";
-  };
-
 
   //The JSX includes the ToggleSwitch component with toggleTheme and isLightTheme props.
   return (
     <div className={`App ${themeClass}`}>
       <div className="layout">
         <div className='calendarButton'>
-        <svg fill="none" height="60" viewBox="0 0 24 24" width="60" xmlns="http://www.w3.org/2000/svg" alt="Calendar" onClick={openModal}>
-          <g fill="currentColor">
-              <path d="m8 5.75c-.41 0-.75-.34-.75-.75v-3c0-.41.34-.75.75-.75s.75.34.75.75v3c0 .41-.34.75-.75.75z"/>
-              <path d="m16 5.75c-.41 0-.75-.34-.75-.75v-3c0-.41.34-.75.75-.75s.75.34.75.75v3c0 .41-.34.75-.75.75z"/>
-              <path d="m15 22.75h-6c-5.62 0-6.75-2.65-6.75-6.93v-6.17c0-4.74 1.6-6.67 5.71-6.9h8.04.04c4.11.23 5.71 2.16 5.71 6.9v6.17c0 4.28-1.13 6.93-6.75 6.93zm-7-18.5c-2.8.16-4.25 1.04-4.25 5.4v6.17c0 3.83.73 5.43 5.25 5.43h6c4.52 0 5.25-1.6 5.25-5.43v-6.17c0-4.35-1.44-5.24-4.27-5.4z"/>
-              <path d="m20.75 18.3501h-17.5c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h17.5c.41 0 .75.34.75.75s-.34.75-.75.75z"/>
-              <path d="m12 8.25c-1.23 0-2.27.67-2.27 1.97 0 .62.29 1.09.73 1.39-.61.36-.96.94-.96 1.62 0 1.24.95 2.01 2.5 2.01 1.54 0 2.5-.77 2.5-2.01 0-.68-.35-1.27-.97-1.62.45-.31.73-.77.73-1.39 0-1.3-1.03-1.97-2.26-1.97zm0 2.84c-.52 0-.9-.31-.9-.8 0-.5.38-.79.9-.79s.9.29.9.79c0 .49-.38.8-.9.8zm0 2.91c-.66 0-1.14-.33-1.14-.93s.48-.92 1.14-.92 1.14.33 1.14.92c0 .6-.48.93-1.14.93z"/>
-          </g>
+        <svg height="60" viewBox="0 0 24 24" width="60" xmlns="http://www.w3.org/2000/svg" alt="Calendar" onClick={openModal}>
+          <path fill="currentColor" class="heroicon-ui" d="M17 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h2V3a1 1 0 1 1 2 0v1h6V3a1 1 0 0 1 2 0v1zm-2 2H9v1a1 1 0 1 1-2 0V6H5v4h14V6h-2v1a1 1 0 0 1-2 0V6zm4 6H5v8h14v-8z"/>
         </svg>
-        <Modal isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Calendar Modal">
+        <Modal className="calendarModal" isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="CalendarModal" >
           <Calendar/>
-          <button onClick={closeModal}>Close</button>
+          <button className="closeCalendar"onClick={closeModal}>Close</button>
         </Modal>
         </div>
         <div className='switch'><ToggleSwitch toggleTheme={toggleTheme} isLightTheme={isLightTheme} /></div>

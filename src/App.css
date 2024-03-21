@@ -44,7 +44,7 @@ h1, h2, p, h3, h4{
 /*    landscape responsiveness    */
 /**********************************/
 
-@media screen and (max-width: 2560px) {
+@media screen and (max-width: 4000px) {
 
     @media screen and (orientation:landscape) {
 
@@ -438,9 +438,9 @@ h1, h2, p, h3, h4{
             align-items: center; 
         }
         
-        /***************************/
+        /*****************/
         /* calendar icon */
-        /***************************/
+        /*****************/
 
         .InteractiveButton {
             grid-area: l-switch;
@@ -458,28 +458,76 @@ h1, h2, p, h3, h4{
             cursor: pointer; 
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffe4e1; 
-            margin: 0;
-            padding: 0;
+        
+        /* Style for the modal content */
+
+        .ReactModal__Content{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        
+
+        .ReactModal__Content {
+            background-color: #0E0D0D;
+            border-radius: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 90%;
+            width: 90%;
+            padding: 10px;
         }
           
-          /* Container */
+        
+        /* Style for the close button */
+        .ReactModal__Content button {
+            /* Customize close button properties */
+            background-color: #ccc; /* Background color */
+            color: #333; /* Text color */
+            border: none; /* Remove border */
+            padding: 10px 20px; /* Padding */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Cursor on hover */
+            margin-top: 20px; /* Margin from the content */
+        }
+        
+        /* Style for the close button on hover */
+        .ReactModal__Content button:hover {
+            background-color: #999; /* Darker background color */
+        }
+  
+          
+        /* Container */
         .container {
+            /* border: 3px solid red; */
+            width: 90%;
+            height: 80%;
+            border-radius: 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            position: relative;
+            /* justify-content: space-between;
             max-width: 800px;
-            margin: 20px auto;
+            margin: 20px auto; */
+            background-color: #C0C0C0;
         }
           
           /* Calendar */
         .calendar {
-            width: 48%;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            background-color: #C0C0C0;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* border: 3px solid red; */
+            /* padding: 50px 130px 50px 130px; */
+            /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */
         }
           
         .calendar-header {
@@ -489,6 +537,8 @@ h1, h2, p, h3, h4{
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
+            /* border: 3px solid red; */
         }
 
         .month-year {
@@ -500,12 +550,8 @@ h1, h2, p, h3, h4{
         .calendar-body {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-        }
-          
-        .calendar-weekdays {
-            display: flex;
-            justify-content: space-between;
+            /* gap: 5px; */
+            /* border: 3px solid red; */
         }
           
         .weekday {
@@ -514,9 +560,11 @@ h1, h2, p, h3, h4{
         }
           
         .calendar-day {
-            padding: 10px;
+            /* padding: 30px; */
+            padding: calc(5%);
             text-align: center;
-            border-radius: 5px;
+            border-radius: 99px;
+            background-color: white;
             cursor: pointer;
             position: relative;
         }
@@ -527,84 +575,65 @@ h1, h2, p, h3, h4{
         }
           
         .calendar-day:hover {
-            background-color: #f0f0f0;
-          
+            background-color: #0E0D0D;
+            color: white;
         }
           
         .calendar-day.selected {
-            background-color: #add8e6;
+            background-color: #0E0D0D;
+            color: white;
           
         }
           
-        .note-indicator {
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            font-size: 12px;
-            color: blue;
-        }
-          
-        .note-indicator.no-click {
-            pointer-events: none;
-        }
-          
-          /* Monthly Review */
-        .monthly-review {
-            width: 48%;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            overflow-y: auto;
-        }
-          
-        .monthly-review-content {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 10px;
+        .calendar-day {
+            /* padding: 30px; */
+            padding: calc(5%);
             text-align: center;
-        }
-          
-        .note-item {
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 10px;
+            border-radius: 99px;
+            background-color: white;
             cursor: pointer;
+            position: relative;
         }
           
-        .note-date {
-            font-weight: bold;
-            margin-bottom: 5px;
+        .calendar-day.empty {
+            visibility: hidden;
+          
         }
           
-        .note-content {
-            margin-bottom: 5px;
+        .calendar-day:hover {
+            background-color: #0E0D0D;
+            color: white;
         }
           
-          /* Note Popup */
+        .calendar-day.selected {
+            background-color: #0E0D0D;
+            color: white;
+          
+        }
+        .monthly-review-section {
+            /* border: 2px solid red; */
+            width: 50%;
+        }
+
+        .monthly-review {
+            text-align: center;
+            font-size: 30px;
+            position: relative;
+            top: 20px;
+        }
+          
         .note-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 20px;
-            display: none;
-            z-index: 1;
-          }
-          
-        .note-popup textarea {
-            width: calc(100% - 40px);
-            height: 100px;
-            resize: none;
-            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
         }
-          
-        .note-popup button {
-            width: calc(50% - 5px);
-            cursor: pointer;
+        
+        textarea {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            margin: 20px;
         }
     } 
 } 
@@ -959,6 +988,164 @@ h1, h2, p, h3, h4{
 
         .container {
             flex-direction: column;
+            overflow-y: scroll;
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;
+        }
+        /* Style for the modal content */
+
+        .ReactModal__Content{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        
+
+        .ReactModal__Content {
+            background-color: #0E0D0D;
+            border-radius: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 90%;
+            width: 90%;
+            padding: 10px;
+        }
+            
+        
+        /* Style for the close button */
+        .ReactModal__Content button {
+            /* Customize close button properties */
+            background-color: #ccc; /* Background color */
+            color: #333; /* Text color */
+            border: none; /* Remove border */
+            padding: 10px 20px; /* Padding */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Cursor on hover */
+            margin-top: 20px; /* Margin from the content */
+        }
+        
+        /* Style for the close button on hover */
+        .ReactModal__Content button:hover {
+            background-color: #999; /* Darker background color */
+        }
+    
+            
+        /* Container */
+        .container {
+            width: 90%;
+            height: 80%;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            background-color: #C0C0C0;
+            border: solid red;
+
+        }
+            
+            /* Calendar */
+        .calendar {
+            border-radius: 20px;
+            background-color: #C0C0C0;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+            
+        .calendar-header {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .month-year {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+            
+        .calendar-body {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+                        
+        .weekday {
+            padding: 10px;
+            text-align: center;
+            
+        }
+            
+        .calendar-day {
+            padding: calc(5%);
+            text-align: center;
+            border-radius: 99px;
+            background-color: white;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+        }
+            
+        .calendar-day.empty {
+            visibility: hidden;
+            
+        }
+            
+            
+        .calendar-day.selected {
+            background-color: #0E0D0D;
+            color: white;
+            
+        }
+            
+        .calendar-day {
+            padding: calc(5%);
+            text-align: center;
+            border-radius: 99px;
+            background-color: white;
+            cursor: pointer;
+            position: relative;
+        }
+            
+        .calendar-day.empty {
+            visibility: hidden;
+            
+        }
+            
+        .monthly-review-section {
+            width: 100%;
+        }
+
+        .monthly-review {
+            text-align: center;
+            font-size: 30px;
+            position: relative;
+            top: 20px;
+        }
+            
+        .note-popup {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        textarea {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            margin: 20px;
         }
 
         .calendar, .monthly-review {
@@ -966,13 +1153,17 @@ h1, h2, p, h3, h4{
         }
 
         .note-popup {
-            width: calc(100% - 40px);
             padding: 10px;
         }
 
-        .note-popup button {
-            width: 100%;
-            margin-top: 10px;
+        .container .monthly-review-section button {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .closeCalendar {
+            font-size: 18px;
+            font-weight: 700;
         }
     }
 }  

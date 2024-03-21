@@ -149,28 +149,30 @@ function Calendar() {
       <div className="calendar">
         <div className="calendar-header">
           <button onClick={previousMonth}>Previous</button>
-          <div>{currentYear} - {currentMonth + 1}</div>
+          <div>
+            {currentYear} - {currentMonth + 1}
+            </div>
           <button onClick={nextMonth}>Next</button>
           <button onClick={goToCurrentMonth}>Today</button>
           <input type="text" value={searchDate} onChange={(e) => setSearchDate(e.target.value)} placeholder="YYYY-MM-DD" />
         </div>
-        <div className="calendar-body">
-      <div className="calendar-weeks">
-        {generateCalendar(currentYear, currentMonth)}
-      </div>
+        <div className="calendar-weeks">
+          {generateCalendar(currentYear, currentMonth)}
         </div>
+      </div>
+      <div className='monthly-review-section'>
+        <div className="monthly-review">
+          {generateMonthlyNotesOverview()}
+        </div>
+        {showNotePopup && (
+          <div className="note-popup">
+            <textarea value={selectedNote} onChange={(e) => setSelectedNote(e.target.value)} />
+            <button onClick={saveNote}>Save Note</button>
+            <button onClick={deleteNote}>Delete Note</button>
+            <button onClick={() => setShowNotePopup(false)}>Close</button>
           </div>
-      <div className="monthly-review">
-        {generateMonthlyNotesOverview()}
+        )}
       </div>
-      {showNotePopup && (
-        <div className="note-popup">
-          <textarea value={selectedNote} onChange={(e) => setSelectedNote(e.target.value)} />
-          <button onClick={saveNote}>Save Note</button>
-          <button onClick={deleteNote}>Delete Note</button>
-          <button onClick={() => setShowNotePopup(false)}>Close</button>
-        </div>
-      )}
     </div>
   );
 }
