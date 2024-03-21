@@ -2,7 +2,9 @@
 /*
 Table of contents 
 ###############################
-1) reset
+1.1) reset
+1.2) dark theme icon styling 
+
 2) landscape responsiveness
     2.1) general styles
     2.2) lightModeDarkModeSwitch
@@ -11,6 +13,7 @@ Table of contents
     2.5) rightSideMainInfo
     2.6) weeklyForecast
     2.7) calendar icon
+    
 3) mobile responsiveness
     2.1) general styles
     2.2) lightModeDarkModeSwitch
@@ -32,6 +35,10 @@ h1, h2, p, h3, h4{
     font-weight: 500;
 }
 
+/******************************************/
+/*        dark theme icon styling         */
+/******************************************/
+
 .theme-dark svg path{
     color: white;
 }
@@ -52,53 +59,46 @@ h1, h2, p, h3, h4{
         /*    General Styles    */
         /************************/
 
+        /* background and font styling */
         .App {
-            /* background colour */
             background: linear-gradient(180deg, #141313 1.5%, #141313 13.5%, #141313 21%, #191717 43%, #2B2929 64.5%, #312F2F 89%, #363333 98.01%, #353333 99.99%, #333030 100%, #7A7474 100%), #D9D9D9;             
-            /* font color */
             color: white; 
             padding: 20px;
             margin: 0;
             padding: 0;
         }
         
+        /* app layout format */
         .layout {
             display: grid;
         
             grid-template-columns: 7fr 3fr;
         
             grid-template-areas: 
-            /* first switch needs to be replaced for calander implementation */
+            /* FIRST ROW*/
             'l-switch r-switch'  
             /* SECOND ROW */
             'main-info right-side-main-info'
             /* THIRD ROW */
             'hourly-weather-box weekly-forecast-box';
         
-            /* Cover the entire viewport height AND width */
+            /* Covers the entire viewport height AND width */
             min-height: 100vh;
             width: 100vw;
         }
         
+        /* second column's background */
         .layout > :nth-child(2n) {
             background: #0E0D0D;
-        }
-
-        .calendarButton {
-            /* border: 3px solid red; */
-            display: flex;
-            justify-content: left;
-            align-items: center;
-            padding-left: 30px ;
         }
 
         /***************************/
         /* lightModeDarkModeSwitch */
         /***************************/
 
+        /* lightModeDarkModeSwitch position */
         .switch {
             grid-area: r-switch;
-            /* border: 3px solid blue; */
             display: flex;
             justify-content: right;
             align-items: center;
@@ -113,8 +113,7 @@ h1, h2, p, h3, h4{
             pointer-events: none; /* Prevents SVG icons from receiving pointer events */
             transition: opacity 0.3s ease-in-out, transform 0.5s ease; /* Adds transition effects to SVG icons */
         }
-        
-        
+            
         /* Styling for the sun SVG icon */
         label svg.sun {
             display: flex; /* Sets the display type for the sun SVG icon */
@@ -122,7 +121,6 @@ h1, h2, p, h3, h4{
             justify-content: center; /* Aligns items along the main-axis */
             opacity: 1; /* Sets the opacity of the sun SVG icon */
         }
-        
         
         /* Styling for the moon SVG icon */
         label svg.moon {
@@ -132,21 +130,18 @@ h1, h2, p, h3, h4{
             position: relative;
             right: 35px;
         }
-        
-        
+         
         /* Styling for the sun SVG icon when the input is checked */
         input:checked + label svg.sun {
             opacity: 0; /* Sets the opacity of the sun SVG icon when input is checked */
             fill: #bdbdbd; /* Sets the fill color of the sun SVG icon when input is checked */
         }
         
-        
         /* Styling for the moon SVG icon when the input is checked */
         input:checked + label svg.moon {
             opacity: 1; /* Sets the opacity of the moon SVG icon when input is checked */
         }
-             
-        
+              
         /* Styling for label elements */
         label {
             display: flex; /* Sets the display type for label elements */
@@ -154,8 +149,7 @@ h1, h2, p, h3, h4{
             border-radius: 15px; /* Sets the border radius of label elements */
             transition: background-color 0.3s ease; /* Adds transition effects to the background color of label elements */
         }
-
-              
+         
         /* Styling for input elements */
         input {
             width: 0; /* Sets the width of input elements to 0 */
@@ -257,12 +251,14 @@ h1, h2, p, h3, h4{
             align-items: center;
         }
 
+        /* positioning text */
         .main-info {
             grid-area: main-info;
             align-self: end;
             margin-bottom: -50px;
         }
 
+        /* font styling */
         .main-info h1,
         .main-info h2,
         .main-info h3 {
@@ -303,12 +299,12 @@ h1, h2, p, h3, h4{
             width: 90%;
         }
 
+        /* hourly weather box styling */
         .hourly-weather-list {
             display: flex;
             justify-content: center;
             align-items: center;
             
-            /*box design*/
             height: 200px;
             flex-shrink: 0;
             border-radius: 30px;
@@ -318,10 +314,11 @@ h1, h2, p, h3, h4{
             position: relative;
         }
 
+        /* hourly weather item styling */
         .hourly-weather-item {
             width: calc(20% - 2%); /* Adjust the width of the items */
             text-align: center;
-            box-sizing: border-box; /* Include margins within the width */
+            box-sizing: border-box;
             position: relative;
             font-size: larger;
         }
@@ -347,11 +344,13 @@ h1, h2, p, h3, h4{
             text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
        
+        /* text positioning */
         .right-side-main-info {
             grid-area: right-side-main-info;
             margin-bottom: -50px;
         }
 
+        /* time and greeting information styling */
         .right-side-main-info-list-firstHalf {
             width: 436px;
             height: 142px;
@@ -362,6 +361,7 @@ h1, h2, p, h3, h4{
             background: #8A8A8A;  
         }
 
+        /* humidity and pressure information styling */
         .right-side-main-info-list-secondHalf {
             position: relative;
             margin-top: 20px;
@@ -385,6 +385,7 @@ h1, h2, p, h3, h4{
         /*   weeklyForecast Styles   */
         /*****************************/
 
+        /* hidden title, used for mobile responsiveness only */
         .forecastTitle {
             display: none;
         }
@@ -396,21 +397,23 @@ h1, h2, p, h3, h4{
         }
 
         .weekly-forecast-box {
+            grid-area: weekly-forecast-box;
             display: flex;
             justify-content: center;
-            align-items: center; 
-            grid-area: weekly-forecast-box;
+            align-items: center;
             
             
         }
         
+        /* forecast list styling */
         .forecast-list {
-            display: grid; /*made a grid for this section, so icon can be 3 per row*/
+            display: grid; /*grid for this section, so icons can be 3 per row*/
             grid-template-columns: 1fr 1fr 1fr; /* 3 columns */
             grid-gap: 30px; /* Gap between grid items */
             place-items: center;
         }
         
+        /* forecast item styling */
         .forecast-item {
             font-size: small;
             height: 129px;
@@ -442,6 +445,14 @@ h1, h2, p, h3, h4{
         /* calendar icon */
         /*****************/
 
+        /* calendar button positioning */
+        .calendarButton {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding-left: 30px ;
+        }
+
         .InteractiveButton {
             grid-area: l-switch;
 
@@ -461,16 +472,12 @@ h1, h2, p, h3, h4{
         
         /* Style for the modal content */
 
+        /* background for popup styled and positioned */
         .ReactModal__Content{
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-        }
-
-        
-
-        .ReactModal__Content {
             background-color: #0E0D0D;
             border-radius: 50px;
             display: flex;
@@ -480,43 +487,36 @@ h1, h2, p, h3, h4{
             height: 90%;
             width: 90%;
             padding: 10px;
-        }
-          
+        }    
         
-        /* Style for the close button */
+        /* style for the  button */
         .ReactModal__Content button {
-            /* Customize close button properties */
-            background-color: #ccc; /* Background color */
-            color: #333; /* Text color */
-            border: none; /* Remove border */
-            padding: 10px 20px; /* Padding */
-            border-radius: 5px; /* Rounded corners */
+            background-color: #ccc; 
+            color: #333; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
             cursor: pointer; /* Cursor on hover */
-            margin-top: 20px; /* Margin from the content */
+            margin-top: 20px;
         }
         
-        /* Style for the close button on hover */
+        /* style for buttons on hover */
         .ReactModal__Content button:hover {
-            background-color: #999; /* Darker background color */
+            background-color: #999; 
         }
-  
-          
-        /* Container */
+        
+        /* container for all calendar informations' styling */
         .container {
-            /* border: 3px solid red; */
             width: 90%;
             height: 80%;
             border-radius: 20px;
             display: flex;
             justify-content: center;
             position: relative;
-            /* justify-content: space-between;
-            max-width: 800px;
-            margin: 20px auto; */
             background-color: #C0C0C0;
         }
           
-          /* Calendar */
+        /* calendar positioning */
         .calendar {
             border-radius: 20px;
             background-color: #C0C0C0;
@@ -525,11 +525,9 @@ h1, h2, p, h3, h4{
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            /* border: 3px solid red; */
-            /* padding: 50px 130px 50px 130px; */
-            /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */
         }
           
+        /* calendar header styling */
         .calendar-header {
             text-align: center;
             font-size: 24px;
@@ -547,11 +545,10 @@ h1, h2, p, h3, h4{
             margin-bottom: 10px;
         }
           
+        /* styling for the grid formation of calendar days */
         .calendar-body {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            /* gap: 5px; */
-            /* border: 3px solid red; */
         }
           
         .weekday {
@@ -559,8 +556,8 @@ h1, h2, p, h3, h4{
             text-align: center;
         }
           
+        /* calendar day items styling */
         .calendar-day {
-            /* padding: 30px; */
             padding: calc(5%);
             text-align: center;
             border-radius: 99px;
@@ -571,50 +568,27 @@ h1, h2, p, h3, h4{
           
         .calendar-day.empty {
             visibility: hidden;
-          
         }
-          
+         
+        /* styling for hovering over days */
         .calendar-day:hover {
             background-color: #0E0D0D;
             color: white;
         }
           
+        /* styling for selecting days */
         .calendar-day.selected {
             background-color: #0E0D0D;
             color: white;
           
         }
-          
-        .calendar-day {
-            /* padding: 30px; */
-            padding: calc(5%);
-            text-align: center;
-            border-radius: 99px;
-            background-color: white;
-            cursor: pointer;
-            position: relative;
-        }
-          
-        .calendar-day.empty {
-            visibility: hidden;
-          
-        }
-          
-        .calendar-day:hover {
-            background-color: #0E0D0D;
-            color: white;
-        }
-          
-        .calendar-day.selected {
-            background-color: #0E0D0D;
-            color: white;
-          
-        }
+
         .monthly-review-section {
             /* border: 2px solid red; */
             width: 50%;
         }
 
+        /* monthly review title styling */
         .monthly-review {
             text-align: center;
             font-size: 30px;
@@ -622,6 +596,7 @@ h1, h2, p, h3, h4{
             top: 20px;
         }
           
+        /* styling for the note popup */
         .note-popup {
             display: flex;
             flex-direction: column;
@@ -651,6 +626,7 @@ h1, h2, p, h3, h4{
         /*    General Styles    */
         /************************/
 
+        /* background and font styling */
         .App {
             color: white;
             background: linear-gradient(180deg, #141313 1.5%, #141313 13.5%, #141313 21%, #191717 43%, #2B2929 64.5%, #312F2F 89%, #363333 98.01%, #353333 99.99%, #333030 100%, #7A7474 100%), #D9D9D9;
@@ -660,10 +636,12 @@ h1, h2, p, h3, h4{
             overflow: scroll;
         }
         
+        /* hiding scrollbar for the app*/
         .App::-webkit-scrollbar {
             display: none;
         }
-    
+
+        /* app layout format */
         .layout {
             display: flex;
             justify-content: space-between;
@@ -671,17 +649,18 @@ h1, h2, p, h3, h4{
             height: 100vh;
         }
 
+        /* calendar button switch positioning */
         .calendarButton {
             position: absolute;
-            /* border: 3px solid red; */
             display: inline-block;
             padding: 5px
         }
     
+        /**** ordering all sections for the flex display ****/
+
         .switch {
             position: relative;
             order: 1;
-            /* border: 3px solid blue; */
         }
     
         .mainColumn {
@@ -719,9 +698,7 @@ h1, h2, p, h3, h4{
             pointer-events: none; /* Prevents SVG icons from receiving pointer events */
             transition: opacity 0.3s ease-in-out, transform 0.5s ease; /* Adds transition effects to SVG icons */
         }
-        
-        
-        
+              
         /* Styling for the sun SVG icon */
         label svg.sun {
             display: flex; /* Sets the display type for the sun SVG icon */
@@ -729,8 +706,7 @@ h1, h2, p, h3, h4{
             justify-content: center; /* Aligns items along the main-axis */
             opacity: 1; /* Sets the opacity of the sun SVG icon */
         }
-        
-        
+            
         /* Styling for the moon SVG icon */
         label svg.moon {
             display: flex; /* Sets the display type for the moon SVG icon */
@@ -739,15 +715,13 @@ h1, h2, p, h3, h4{
             position: relative;
             right: 20px;
         }
-        
-        
+             
         /* Styling for the sun SVG icon when the input is checked */
         input:checked + label svg.sun {
             opacity: 0; /* Sets the opacity of the sun SVG icon when input is checked */
             fill: #bdbdbd; /* Sets the fill color of the sun SVG icon when input is checked */
         }
-        
-        
+            
         /* Styling for the moon SVG icon when the input is checked */
         input:checked + label svg.moon {
             opacity: 1; /* Sets the opacity of the moon SVG icon when input is checked */
@@ -849,6 +823,7 @@ h1, h2, p, h3, h4{
         /*   mainInfo Styles  */
         /**********************/
     
+        /* font styling */
         .main-info {
             text-align: center;
         }
@@ -881,10 +856,12 @@ h1, h2, p, h3, h4{
         /*   rightSideMainInfo Styles   */
         /********************************/
 
+        /* hiding the time and greeting information */
         .rightMainColumn .right-side-main-info-list-firstHalf {
             display: none;
         }  
 
+        /*  text positioning */
         .right-side-main-info-list-secondHalf {
             text-align: center;
             font-size: 20px;
@@ -904,16 +881,17 @@ h1, h2, p, h3, h4{
             align-items: center;
         }
     
+        /* hourly weather item styling */
         .hourly-weather-item {
             width: calc(20% - 2%); /* Adjust the width of the items */
             text-align: center;
-            box-sizing: border-box; /* Include margins within the width */
+            box-sizing: border-box; 
             position: relative;
             font-size: 12px;
         }
     
+        /* hourly weather box styling */
         .hourly-weather-list {
-            /*box design*/
             overflow-x: scroll;
             display: flex;
             align-items: center;
@@ -925,10 +903,12 @@ h1, h2, p, h3, h4{
             position: relative;
         }
 
+        /* hiding scrollbar for hourly weather list */
         .hourly-weather-list::-webkit-scrollbar {
             display: none;
         }
 
+        /* hourly weather item styling */
         .hourly-weather-item:nth-child(1),
         .hourly-weather-item:nth-child(2),
         .hourly-weather-item:nth-child(3),
@@ -944,6 +924,7 @@ h1, h2, p, h3, h4{
         /*   weeklyForecast Styles   */
         /*****************************/
 
+        /* title displayed for mobile responsiveness */
         .forecastTitle {
             font-size: 30px;
             margin-left: 20px;
@@ -952,7 +933,8 @@ h1, h2, p, h3, h4{
         .weekly-forecast-box {
             padding: 10px;
         }
-    
+
+        /* forecast list styling */
         .forecast-list {
             padding: 1em;
             display: grid;
@@ -963,10 +945,12 @@ h1, h2, p, h3, h4{
             place-items: center;
         }
 
+        /* hiding forecast list scroll bar */
         .forecast-list::-webkit-scrollbar {
             display: none;
         }
     
+        /* forecast item styling */
         .forecast-item {
             text-align: center;
             font-size: 14px;
@@ -982,10 +966,11 @@ h1, h2, p, h3, h4{
             box-shadow: 8px 7px 8.8px -1px rgba(0, 0, 0, 0.25);
         }
 
-        /********************************/
+        /*********************/
         /*   calendar icon   */
-        /********************************/
+        /*********************/
 
+        /* styling for mobile responsiveness of calendar */
         .container {
             flex-direction: column;
             overflow-y: scroll;
@@ -994,18 +979,16 @@ h1, h2, p, h3, h4{
         .container::-webkit-scrollbar {
             display: none;
         }
-        /* Style for the modal content */
 
+        /* Style for the modal content */
+        
+        /* background for popup styled and positioned */
         .ReactModal__Content{
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-        }
 
-        
-
-        .ReactModal__Content {
             background-color: #0E0D0D;
             border-radius: 50px;
             display: flex;
@@ -1020,23 +1003,21 @@ h1, h2, p, h3, h4{
         
         /* Style for the close button */
         .ReactModal__Content button {
-            /* Customize close button properties */
-            background-color: #ccc; /* Background color */
-            color: #333; /* Text color */
-            border: none; /* Remove border */
-            padding: 10px 20px; /* Padding */
-            border-radius: 5px; /* Rounded corners */
+            background-color: #ccc; 
+            color: #333;
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
             cursor: pointer; /* Cursor on hover */
-            margin-top: 20px; /* Margin from the content */
+            margin-top: 20px;
         }
         
-        /* Style for the close button on hover */
+        /* Style for buttons on hover */
         .ReactModal__Content button:hover {
-            background-color: #999; /* Darker background color */
+            background-color: #999; 
         }
-    
             
-        /* Container */
+        /* container for all calendar informations' styling */
         .container {
             width: 90%;
             height: 80%;
@@ -1045,11 +1026,9 @@ h1, h2, p, h3, h4{
             justify-content: center;
             position: relative;
             background-color: #C0C0C0;
-            border: solid red;
-
         }
             
-            /* Calendar */
+        /* calendar positioning */
         .calendar {
             border-radius: 20px;
             background-color: #C0C0C0;
@@ -1060,6 +1039,7 @@ h1, h2, p, h3, h4{
             flex-direction: column;
         }
             
+        /* calendar header styling */
         .calendar-header {
             text-align: center;
             font-size: 24px;
@@ -1076,6 +1056,7 @@ h1, h2, p, h3, h4{
             margin-bottom: 10px;
         }
             
+        /* styling for the grid formation of calendar days */
         .calendar-body {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -1086,7 +1067,8 @@ h1, h2, p, h3, h4{
             text-align: center;
             
         }
-            
+
+        /* calendar day items styling */
         .calendar-day {
             padding: calc(5%);
             text-align: center;
@@ -1102,31 +1084,19 @@ h1, h2, p, h3, h4{
             
         }
             
-            
+        /* styling for selecting days */
         .calendar-day.selected {
             background-color: #0E0D0D;
             color: white;
             
         }
             
-        .calendar-day {
-            padding: calc(5%);
-            text-align: center;
-            border-radius: 99px;
-            background-color: white;
-            cursor: pointer;
-            position: relative;
-        }
-            
-        .calendar-day.empty {
-            visibility: hidden;
-            
-        }
-            
+        /* monthly review section styling */
         .monthly-review-section {
             width: 100%;
         }
 
+        /* monthly review title styling */
         .monthly-review {
             text-align: center;
             font-size: 30px;
@@ -1134,11 +1104,13 @@ h1, h2, p, h3, h4{
             top: 20px;
         }
             
+        /* styling for the note popup */
         .note-popup {
             display: flex;
             flex-direction: column;
         }
         
+        /* note popup text area styling */
         textarea {
             text-align: center;
             display: flex;
@@ -1156,11 +1128,13 @@ h1, h2, p, h3, h4{
             padding: 10px;
         }
 
+        /* monthyl review sections button styling */
         .container .monthly-review-section button {
             font-size: 20px;
             font-weight: 600;
         }
 
+        /* close button styling */
         .closeCalendar {
             font-size: 18px;
             font-weight: 700;
