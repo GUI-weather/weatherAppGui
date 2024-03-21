@@ -78,6 +78,10 @@ h1, h2, p, h3, h4{
     color: white;
 }
 
+.theme-dark svg g{
+    color: white;
+}
+
 /**********************************/
 /*    landscape responsiveness    */
 /**********************************/
@@ -118,10 +122,17 @@ h1, h2, p, h3, h4{
             width: 100vw;
         }
         
-        .layout > :nth-child(2n + 1) {
+        .layout > :nth-child(2n) {
             background: #0E0D0D;
         }
 
+        .calendarButton {
+            /* border: 3px solid red; */
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding-left: 30px ;
+        }
 
         /***************************/
         /* lightModeDarkModeSwitch */
@@ -129,7 +140,7 @@ h1, h2, p, h3, h4{
 
         .switch {
             grid-area: r-switch;
-
+            /* border: 3px solid blue; */
             display: flex;
             justify-content: right;
             align-items: center;
@@ -200,7 +211,7 @@ h1, h2, p, h3, h4{
             color: black; /* Sets the text color of the light theme */
         }
 
-        .theme-light .layout > :nth-child(2n + 1) {
+        .theme-light .layout > :nth-child(2n) {
             background: #C0C0C0; /* Sets background colour of 2nd column */
         }
 
@@ -387,6 +398,7 @@ h1, h2, p, h3, h4{
             width: 436px;
             height: 142px;
             margin: 0 12px 0 12px;
+            padding-top: 30px;
             flex-shrink: 0;
             border-radius: 30px;
             background: #8A8A8A;  
@@ -671,9 +683,18 @@ h1, h2, p, h3, h4{
             flex-direction: column;
             height: 100vh;
         }
+
+        .calendarButton {
+            position: absolute;
+            /* border: 3px solid red; */
+            display: inline-block;
+            padding: 5px
+        }
     
         .switch {
+            position: relative;
             order: 1;
+            /* border: 3px solid blue; */
         }
     
         .mainColumn {
