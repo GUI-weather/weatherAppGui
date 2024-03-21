@@ -481,11 +481,11 @@ h1, h2, p, h3, h4{
         }
 
         .buttonIcon {
-            width: auto; /* Set width relative to 10% of the viewport width */
-            height: auto; /* Maintain aspect ratio */
-            display: block; /* Ensure proper rendering as a block element */
-            margin: 0 auto; /* Center the SVG horizontally */
-            cursor: pointer; /* Change cursor to pointer on hover for indicating clickability */
+            width: auto; 
+            height: auto;
+            display: block;
+            margin: 0 auto; 
+            cursor: pointer; ]
         }
     } 
 } 
@@ -828,6 +828,20 @@ h1, h2, p, h3, h4{
         /********************************/
         /*   calendar icon   */
         /********************************/
-    
+
+        .InteractiveButton {
+            grid-area: l-switch;
+
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+
+        .buttonIcon {
+            width: auto; 
+            height: auto;
+            display: block; 
+            margin: 0 auto; 
+            cursor: pointer; 
     }
 }  
