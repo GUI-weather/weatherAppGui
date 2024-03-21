@@ -13,6 +13,7 @@ function App() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Constant variables used for the calendar popup, when opened and closed
   const openModal = () => {
     setIsModalOpen(true);
   };

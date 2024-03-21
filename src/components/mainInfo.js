@@ -20,6 +20,7 @@ function MainInfo({ lat,long }) {
     const highTemperature = kelvinToCelsius(weatherData.main?.temp_max);
     const lowTemperature = kelvinToCelsius(weatherData.main?.temp_min);
 
+    // Displays main weather information
     return (
         <div className="main-info">
             <div className="main-info-list">

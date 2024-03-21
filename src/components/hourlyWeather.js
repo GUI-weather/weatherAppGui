@@ -16,10 +16,13 @@ function HourlyWeatherBox({ lat, long }) {
   return (
     <div className="hourly-weather-box">
       <div className="hourly-weather-list">
+        
+        {/* Displays weather forecast for the next 5 hours */}
         {next5HoursForecast.map((forecast, index) => {
           const description = forecast.weather[0].description.toLowerCase();
+
+          // Icon is displayed for the corresponding weather condition for a given hour
           let icon;
-          //Adjusts the icons based on the weather condition returned by api
           if (description.includes('overcast clouds')) {
             icon = 
               <svg className='weatherIcon' width="44.4675" height="32.6095" fill="none" viewBox="0 0 30 22" xmlns="http://www.w3.org/2000/svg" alt="Overcast Clouds">
@@ -83,6 +86,7 @@ function HourlyWeatherBox({ lat, long }) {
             icon = <span>{description}</span>;
           }
 
+          // Display for the hourly weather items
           return (
             <div key={index} className={`hourly-weather-item item-${index}`}>
               <h3>{new Date(forecast.dt_txt).getHours()}:00</h3>

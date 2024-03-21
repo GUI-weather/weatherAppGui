@@ -39,7 +39,7 @@ function RightSideMainInfo({ lat, long  }) {
     </div>
   );
 }
-//Greeting adjusted to current time
+// Greeting adjusted to current time
 function getGreeting(hours) {
   let greeting = '';
   if (hours < 12) {

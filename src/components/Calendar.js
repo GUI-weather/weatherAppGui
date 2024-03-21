@@ -1,6 +1,7 @@
 // Calendar.js
 import buttonIcon from '../images/2867870_calander_icon.png'
 
+// Button for calendar
 function CalendarPage() {
   return (
     <div>

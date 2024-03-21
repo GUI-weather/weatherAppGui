@@ -16,12 +16,14 @@ function Calendar() {
 
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+  // Generates calendar dates
   const generateCalendar = (year, month) => {
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
   
     const calendarArray = [];
-  
+   
+    // Positions date to corresponding day of the week
     let dayCounter = 1;
     for (let i = 0; i < 6; i++) {
       const week = [];
@@ -38,6 +40,7 @@ function Calendar() {
       calendarArray.push(week);
     }
   
+    // Calendar dates and days positioned
     return (
       <table className="calendar-table">
         <thead>
@@ -67,18 +70,16 @@ function Calendar() {
   };
   
   
-  
-  
-  
-  
-  
 
+
+  // Popup for when a day is selected
   const handleDayClick = (date) => {
     setSelectedDate(date);
     setSelectedNote(notes[date] || '');
     setShowNotePopup(true);
   };
 
+  // Allows user to save a note to a specific date
   const saveNote = () => {
     if (selectedDate) {
       const updatedNotes = { ...notes, [selectedDate]: selectedNote };
@@ -88,6 +89,7 @@ function Calendar() {
     }
   };
 
+  // Allows user to delete note
   const deleteNote = () => {
     if (selectedDate) {
       const updatedNotes = { ...notes };
@@ -98,16 +100,19 @@ function Calendar() {
     }
   };
 
+  // Redirects to the previous month
   const previousMonth = () => {
     setCurrentMonth((prevMonth) => (prevMonth === 0 ? 11 : prevMonth - 1));
     setCurrentYear((prevYear) => (currentMonth === 0 ? prevYear - 1 : prevYear));
   };
 
+  // Redirects to the next month
   const nextMonth = () => {
     setCurrentMonth((prevMonth) => (prevMonth === 11 ? 0 : prevMonth + 1));
     setCurrentYear((prevYear) => (currentMonth === 11 ? prevYear + 1 : prevYear));
   };
 
+  // Redirects to current month
   const goToCurrentMonth = () => {
     const today = new Date();
     setCurrentYear(today.getFullYear());
@@ -124,6 +129,7 @@ function Calendar() {
     }
   };
 
+  // Generates an overview of users monthly notes
   const generateMonthlyNotesOverview = () => {
     const monthlyNotes = Object.entries(notes).filter(([date]) => {
       const [year, month] = date.split('-').map(Number);
@@ -144,8 +150,10 @@ function Calendar() {
         );
     };
 
+  // Users interface of calendar and monthly review information
   return (
     <div className="container">
+      {/* Calendar display */}
       <div className="calendar">
         <div className="calendar-header">
           <button onClick={previousMonth}>Previous</button>
@@ -160,10 +168,13 @@ function Calendar() {
           {generateCalendar(currentYear, currentMonth)}
         </div>
       </div>
+
+      {/* Monthly review display */}
       <div className='monthly-review-section'>
         <div className="monthly-review">
           {generateMonthlyNotesOverview()}
         </div>
+        {/* Display when a day is selected */}
         {showNotePopup && (
           <div className="note-popup">
             <textarea value={selectedNote} onChange={(e) => setSelectedNote(e.target.value)} />
