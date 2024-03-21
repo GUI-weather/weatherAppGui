@@ -19,9 +19,9 @@ function Calendar() {
   const generateCalendar = (year, month) => {
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-
+  
     const calendarArray = [];
-
+  
     let dayCounter = 1;
     for (let i = 0; i < 6; i++) {
       const week = [];
@@ -29,7 +29,7 @@ function Calendar() {
         if (i === 0 && j < firstDayOfMonth) {
           week.push('');
         } else if (dayCounter > daysInMonth) {
-          break;
+          week.push('');
         } else {
           week.push(dayCounter);
           dayCounter++;
@@ -37,21 +37,41 @@ function Calendar() {
       }
       calendarArray.push(week);
     }
-
-    return calendarArray.map((week, index) => (
-      <div key={index} className="calendar-week">
-        {week.map((day, index) => (
-          <div
-            key={index}
-            className={`calendar-day ${day === '' ? 'empty' : ''} ${day === selectedDate ? 'selected' : ''}`}
-            onClick={() => handleDayClick(day)}
-          >
-            {day}
-          </div>
-        ))}
-      </div>
-    ));
+  
+    return (
+      <table className="calendar-table">
+        <thead>
+          <tr>
+            {daysOfWeek.map(day => (
+              <th key={day} className="weekday">{day}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {calendarArray.map((week, weekIndex) => (
+            <tr key={weekIndex} className="calendar-week">
+              {week.map((date, dayIndex) => (
+                <td
+                  key={dayIndex}
+                  className={`calendar-day ${date === '' ? 'empty' : ''} ${date === selectedDate ? 'selected' : ''}`}
+                  onClick={() => handleDayClick(date)}
+                >
+                  {date !== '' && date}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
   };
+  
+  
+  
+  
+  
+  
+  
 
   const handleDayClick = (date) => {
     setSelectedDate(date);
@@ -133,17 +153,13 @@ function Calendar() {
           <button onClick={nextMonth}>Next</button>
           <button onClick={goToCurrentMonth}>Today</button>
           <input type="text" value={searchDate} onChange={(e) => setSearchDate(e.target.value)} placeholder="YYYY-MM-DD" />
-          <button onClick={handleSearchDate}>Go</button>
         </div>
         <div className="calendar-body">
-          <div className="calendar-weekdays">
-            {daysOfWeek.map(day => (
-              <div key={day} className="weekday">{day}</div>
-            ))}
-          </div>
-          {generateCalendar(currentYear, currentMonth)}
-        </div>
+      <div className="calendar-weeks">
+        {generateCalendar(currentYear, currentMonth)}
       </div>
+        </div>
+          </div>
       <div className="monthly-review">
         {generateMonthlyNotesOverview()}
       </div>
