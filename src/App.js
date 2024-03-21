@@ -6,8 +6,8 @@ import RightSideMainInfo from './components/rightSideMainInfo';
 import HourlyWeatherBox from './components/hourlyWeather';
 import WeeklyForecast from './components/weeklyForecast';
 import ToggleSwitch from './components/lightModeDarkModeSwitch';
-import InteractiveButton from './components/InteractiveButton';
-import buttonIcon from './button-icon.svg'; // Importing the button icon
+import buttonIcon from './button-icon.svg'; 
+import CalendarPage from './components/Calendar';
 
 function App() {
   const [lat, setLat] = useState(null); // State variable to store latitude
@@ -31,7 +31,7 @@ function App() {
 
   // Placeholder function for handleButtonClick
   const handleButtonClick = () => {
-    console.log('Button clicked!');
+    window.location.href = "CalendarBox.js";
   };
 
   //useState is a React Hook used for managing state in functional components.
@@ -58,13 +58,13 @@ function App() {
   return (
     <div className={`App ${themeClass}`}>
       <div className="layout">
-        <div className='switch'><ToggleSwitch toggleTheme={toggleTheme} isLightTheme={isLightTheme} /></div>
+        <div className='l-switch'><CalendarPage onClick={handleButtonClick} icon={buttonIcon} /></div>
+        <div className='r-switch'><ToggleSwitch toggleTheme={toggleTheme} isLightTheme={isLightTheme} /></div>
         <div className='mainColumn'><MainInfo lat={lat} long={long} /></div>
         <div className='rightMainColumn'><RightSideMainInfo lat={lat} long={long}/></div>
         <div className='hourlyColumn'><HourlyWeatherBox lat={lat} long={long}/></div>
         <div className='weeklyColumn'><WeeklyForecast lat={lat} long={long}/></div>
       </div>
-      <InteractiveButton onClick={handleButtonClick} icon={buttonIcon} />
     </div>
   );
 }
