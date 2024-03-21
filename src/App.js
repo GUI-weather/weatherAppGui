@@ -60,7 +60,7 @@ function App() {
     <div className={`App ${themeClass}`}>
       <div className="layout">
         <div className='l-switch'><CalendarPage onClick={handleButtonClick} icon={buttonIcon} /></div>
-        <div className='r-switch'><ToggleSwitch toggleTheme={toggleTheme} isLightTheme={isLightTheme} /></div>
+        <div className='switch'><ToggleSwitch toggleTheme={toggleTheme} isLightTheme={isLightTheme} /></div>
         <div className='mainColumn'><MainInfo lat={lat} long={long} /></div>
         <div className='rightMainColumn'><RightSideMainInfo lat={lat} long={long}/></div>
         <div className='hourlyColumn'><HourlyWeatherBox lat={lat} long={long}/></div>
