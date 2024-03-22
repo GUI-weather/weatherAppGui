@@ -1,4 +1,4 @@
-# Educast
+# EduCast
 ## Problem?
 In 2024, university students are increasingly finding it challenging to maintain focus on singular tasks, primarily due to the number of distractions that apps like TikTok, BeReal, or Instagram bring into their lives.
 
