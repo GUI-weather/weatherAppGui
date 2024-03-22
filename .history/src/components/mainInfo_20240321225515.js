@@ -2,7 +2,7 @@ import React from 'react';
 import { useWeatherData } from './ApiManager';
 import { kelvinToCelsius } from './reusable';
 
-// Fetches weather data from the API using a custom hook
+// Fetch weather data from the API using a custom hook
 function MainInfo({ lat,long }) {
     const { weatherData, error } = useWeatherData(lat,long ); 
 
@@ -14,7 +14,7 @@ function MainInfo({ lat,long }) {
         return <div>Loading...</div>;
     }
 
-    // Extracts relevant data from the weather data
+    // Extract relevant data from the weather data
     const cityName = weatherData.name;
     const currentTemperature = kelvinToCelsius(weatherData.main?.temp);
     const highTemperature = kelvinToCelsius(weatherData.main?.temp_max);

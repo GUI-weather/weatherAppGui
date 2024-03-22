@@ -21,6 +21,6 @@ export function useLocation() {
       }
     }, []); // Empty dependency array to ensure useEffect only runs once
   
-    // Return the location that the user is currently in 
+    // Return the current position
     return position;
   }

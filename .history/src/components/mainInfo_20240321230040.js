@@ -14,7 +14,7 @@ function MainInfo({ lat,long }) {
         return <div>Loading...</div>;
     }
 
-    // Extracts relevant data from the weather data
+    // Extract relevant data from the weather data
     const cityName = weatherData.name;
     const currentTemperature = kelvinToCelsius(weatherData.main?.temp);
     const highTemperature = kelvinToCelsius(weatherData.main?.temp_max);

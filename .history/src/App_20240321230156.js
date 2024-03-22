@@ -8,15 +8,19 @@ import WeeklyForecast from './components/weeklyForecast';
 import ToggleSwitch from './components/lightModeDarkModeSwitch';
 import Modal from 'react-modal';
 import Calendar from './components/CalendarBox'; 
+import calendarIcon from './images/calendar.svg'
 
 function App() {
 
+  // State variable to manage the modal open/close state
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Function to open the modal
   const openModal = () => {
     setIsModalOpen(true);
   };
 
+  // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -81,7 +85,6 @@ function App() {
           </g>
         </svg>
         <Modal isOpen={isModalOpen} onRequestClose={closeModal} contentLabel="Calendar Modal">
-          <Calendar/>
           <button onClick={closeModal}>Close</button>
         </Modal>
         </div>

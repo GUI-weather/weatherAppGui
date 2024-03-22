@@ -2,7 +2,6 @@ import React from 'react';
 import { useWeatherData } from './ApiManager';
 
 function RightSideMainInfo({ lat, long  }) {
-  // Fetches weather data from the API using custom hook
   const { weatherData, error } = useWeatherData(lat, long );
 
   if (error) {
@@ -13,7 +12,7 @@ function RightSideMainInfo({ lat, long  }) {
     return <div>Loading...</div>;
   }
 
-  // Extracts relevant data from the weather data
+  // Extract relevant data from the weather data
   const humidity = weatherData.main?.humidity;
   const pressure = weatherData.main?.pressure;
   const currentTime = new Date();
@@ -39,7 +38,7 @@ function RightSideMainInfo({ lat, long  }) {
     </div>
   );
 }
-//Greeting adjusted to current time
+
 function getGreeting(hours) {
   let greeting = '';
   if (hours < 12) {

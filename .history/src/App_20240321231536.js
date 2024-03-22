@@ -8,6 +8,7 @@ import WeeklyForecast from './components/weeklyForecast';
 import ToggleSwitch from './components/lightModeDarkModeSwitch';
 import Modal from 'react-modal';
 import Calendar from './components/CalendarBox'; 
+import calendarIcon from './images/calendar.svg'
 
 function App() {
 
